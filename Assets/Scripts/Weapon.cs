@@ -19,6 +19,7 @@ public class Weapon : MonoBehaviour
     [SerializeField] protected ParticleSystem hitEnvironment;
     [SerializeField] protected ParticleSystem hitEnemy;
     [SerializeField] protected Camera cam;
+    [SerializeField] protected MouseLook mouseLook;
     [Space]
     [SerializeField] protected AudioSource fire;
     [SerializeField] protected AudioSource reload;
@@ -51,10 +52,6 @@ public class Weapon : MonoBehaviour
         muzzleFlash.Play();
         currentAmmo--;
         shootTimer = fireRate;
-    }
-    protected void Recoil(float recoilValue)
-    {
-
     }
     public float GetDamage()
     {

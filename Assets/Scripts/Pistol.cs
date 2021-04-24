@@ -16,6 +16,7 @@ public class Pistol : Weapon
         if (Input.GetKey(KeyCode.Mouse0) && canShoot && shootTimer<=0 && currentAmmo>0)
         {
             Shoot(ref currentAmmo);
+            mouseLook.AddRecoil(verticalRecoil, Random.Range(-horizontalRecoil, horizontalRecoil));
             if (fire != null)
                 fire.Play();
         }
