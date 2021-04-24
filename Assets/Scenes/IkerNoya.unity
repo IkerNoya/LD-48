@@ -248,7 +248,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 747d98fa48eda504a8451fcff3c36d40,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.84268045
+      value: 6.59
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 747d98fa48eda504a8451fcff3c36d40,
         type: 3}
@@ -467,21 +467,6 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &8512898869450847266
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8512898869450847270}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7155e2f5e23602f4590753570ec5bf41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  verticalSensitivity: 400
-  horizontalSensitivity: 400
-  body: {fileID: 8512898870205981564}
 --- !u!4 &8512898869450847267
 Transform:
   m_ObjectHideFlags: 0
@@ -558,7 +543,7 @@ GameObject:
   - component: {fileID: 8512898869450847267}
   - component: {fileID: 8512898869450847268}
   - component: {fileID: 8512898869450847269}
-  - component: {fileID: 8512898869450847266}
+  - component: {fileID: 8512898869450847271}
   m_Layer: 9
   m_Name: PlayerCamera
   m_TagString: MainCamera
@@ -566,6 +551,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &8512898869450847271
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8512898869450847270}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7155e2f5e23602f4590753570ec5bf41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  verticalSensitivity: 300
+  horizontalSensitivity: 300
+  body: {fileID: 8512898870205981564}
 --- !u!224 &8512898869733859088
 RectTransform:
   m_ObjectHideFlags: 0
@@ -708,8 +708,14 @@ MonoBehaviour:
   crouchSpeed: 10
   groundDistance: 0.4
   jumpHeight: 2
+  headBobbingIntensity: 0.1
+  walkingHeadBobFrequency: 5
+  sprintingHeadBobFrequency: 7
+  crouchingHeadBobFrequency: 3
+  hBobVerticalAmplitude: 0.15
   groundCheck: {fileID: 8512898870021418328}
   head: {fileID: 1159773421}
+  camera: {fileID: 8512898869450847267}
   groundMask:
     serializedVersion: 2
     m_Bits: 1024
@@ -741,7 +747,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8512898870205981565}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7, y: -2.88, z: -10}
+  m_LocalPosition: {x: 7, y: 6.59, z: -10}
   m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
   m_Children:
   - {fileID: 8512898869277521760}

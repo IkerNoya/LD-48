@@ -8,21 +8,32 @@ public class FPSController : MonoBehaviour
     [SerializeField] float sprintSpeed;
     [SerializeField] float crouchMovementSpeed;
     [SerializeField] float crouchSpeed;
+    [Space]
     [SerializeField] float groundDistance;
     [SerializeField] float jumpHeight;
+    [Space]
+    [SerializeField] float headBobbingIntensity;
+    [SerializeField] float walkingHeadBobFrequency;
+    [SerializeField] float sprintingHeadBobFrequency;
+    [SerializeField] float crouchingHeadBobFrequency;
+    [SerializeField] float hBobVerticalAmplitude;
+    [Space]
     [SerializeField] Transform groundCheck;
     [SerializeField] Transform head;
+    [SerializeField] Transform camera;
     [SerializeField] LayerMask groundMask;
 
     public bool crouchToggle;
     public bool sprintToggle;
 
     CharacterController controller;
-    GameObject camera;
 
     float gravity = -9.81f * 2;
     float yNegativeVelocity = -2;
     float crouchedHeadPos;
+    float timeWalking;
+    float hBobFrequency;
+    float axisDifference = 0.001f;
 
     Vector3 movement;
     Vector3 velocity;
@@ -34,15 +45,14 @@ public class FPSController : MonoBehaviour
     void Start()
     {
         controller = GetComponent<CharacterController>();
-        camera = Camera.main.gameObject;
-        crouchedHeadPos = camera.transform.position.y - 0.5f;
+        crouchedHeadPos = camera.transform.position.y - 0.7f;
     }
 
     void Update()
     {
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
 
-        if(isGrounded && velocity.y < 0)
+        if (isGrounded && velocity.y < 0)
             velocity.y = yNegativeVelocity;
 
         //movement + sprint
@@ -50,14 +60,23 @@ public class FPSController : MonoBehaviour
         float z = Input.GetAxis("Vertical");
 
         movement = transform.right * x + transform.forward * z;
+        if(Input.GetButton("Horizontal") || Input.GetButton("Vertical"))
+            timeWalking += Time.deltaTime;
+        else
+            timeWalking = 0;
 
+        if (isSprinting && !isCrouched) hBobFrequency = sprintingHeadBobFrequency;
+        else if (!isSprinting && isCrouched) hBobFrequency = crouchingHeadBobFrequency;
+        else hBobFrequency = walkingHeadBobFrequency;
+        Debug.Log(timeWalking);
         //jump + artificial gravity
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
 
         Inputs();
         Movement();
-        Crouch();
+        //Crouch();
+        HeadBobbing();
     }
     void Inputs()
     {
@@ -113,19 +132,20 @@ public class FPSController : MonoBehaviour
     }
     void Movement()
     {
-        if(isSprinting)
+        if (isSprinting)
             controller.Move(movement * sprintSpeed * Time.deltaTime);
         if (isCrouched)
             controller.Move(movement * crouchMovementSpeed * Time.deltaTime);
         if (!isSprinting && !isCrouched)
             controller.Move(movement * speed * Time.deltaTime);
     }
+    //reparar
     void Crouch()
     {
         float height = camera.transform.position.y;
         if (isCrouched && height >= crouchedHeadPos)
             height -= Time.deltaTime * crouchSpeed;
-        else if(!isCrouched)
+        else if (!isCrouched)
         {
             if (height < head.position.y)
                 height += Time.deltaTime * crouchSpeed;
@@ -134,5 +154,29 @@ public class FPSController : MonoBehaviour
         }
         Debug.Log(height);
         camera.transform.position = new Vector3(camera.transform.position.x, height, camera.transform.position.z);
+    }
+
+    void HeadBobbing()
+    {
+        Vector3 newHeadPosition;
+        newHeadPosition = head.position + CalculateHeadBobOffset(timeWalking);
+        camera.position = Vector3.Lerp(camera.position, newHeadPosition, headBobbingIntensity);
+
+        if((camera.position - newHeadPosition).magnitude <= axisDifference)
+        {
+            camera.position = newHeadPosition;
+        }
+
+    }
+    Vector3 CalculateHeadBobOffset(float value)
+    {
+        float movement;
+        Vector3 offset = Vector3.zero;
+        if (value > 0)
+        {
+            movement = Mathf.Sin(value * hBobFrequency * 2) * hBobVerticalAmplitude;
+            offset = head.transform.up * movement;
+        }
+        return offset;
     }
 }
