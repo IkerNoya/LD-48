@@ -56,4 +56,8 @@ public class Weapon : MonoBehaviour
     {
 
     }
+    public float GetDamage()
+    {
+        return damage;
+    }
 }
