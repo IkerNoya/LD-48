@@ -373,12 +373,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
---- !u!4 &1177869678 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5696674294651233864, guid: feaab1a26f0076949b75dcdd9cea7aac,
-    type: 3}
-  m_PrefabInstance: {fileID: 4120023442327289607}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4120023442327289607
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -400,6 +394,11 @@ PrefabInstance:
         type: 3}
       propertyPath: maxLife
       value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 5696674294651233865, guid: feaab1a26f0076949b75dcdd9cea7aac,
+        type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 5696674294942069104, guid: feaab1a26f0076949b75dcdd9cea7aac,
         type: 3}
@@ -480,6 +479,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: PlayerController
+      objectReference: {fileID: 0}
+    - target: {fileID: 5696674295403967061, guid: feaab1a26f0076949b75dcdd9cea7aac,
+        type: 3}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: feaab1a26f0076949b75dcdd9cea7aac, type: 3}
@@ -589,11 +593,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2703828737639698363, guid: 2d3cd8877ac9d414ab31a35161cfac49,
-        type: 3}
-      propertyPath: CurrentTarget
-      value: 
-      objectReference: {fileID: 1177869678}
     - target: {fileID: 3863642768096952422, guid: 2d3cd8877ac9d414ab31a35161cfac49,
         type: 3}
       propertyPath: m_LocalPosition.x

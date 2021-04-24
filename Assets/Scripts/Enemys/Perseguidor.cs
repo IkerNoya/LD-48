@@ -72,8 +72,9 @@ public class Perseguidor : Enemy
         fsmEnemy.SetRelations((int)Perseguidor_STATES.AttackTarget, (int)Perseguidor_STATES.Die, (int)Perseguidor_EVENTS.LifeOut);
     }
 
-    void Start()
+    protected override void Start()
     {
+        base.Start();
         auxDelayAttack = delayAttack;
     }
 

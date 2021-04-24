@@ -397,6 +397,7 @@ MonoBehaviour:
   startBehaviour: 1
   navMeshAgent: {fileID: 2703828737639698360}
   healthSystem: {fileID: 2703828737639698361}
+  nameTagTarget: Player
   CurrentTarget: {fileID: 0}
   speedRunToTarget: 10
   damagePerseguidor: 5
