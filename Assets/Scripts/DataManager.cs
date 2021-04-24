@@ -4,12 +4,17 @@ using UnityEngine;
 
 public class DataManager : MonoBehaviour
 {
-    void Start()
+    public static DataManager instance;
+    void Awake()
     {
-        
+        if(instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        instance = this;
+        DontDestroyOnLoad(gameObject);
     }
-    void Update()
-    {
-        
-    }
+
+
 }

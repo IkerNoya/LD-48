@@ -28,4 +28,11 @@ public class SceneLoader : MonoBehaviour
     {
         return SceneManager.GetActiveScene();
     }
+    public void Salir()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#endif
+        Application.Quit();
+    }
 }
