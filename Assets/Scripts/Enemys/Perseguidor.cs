@@ -18,9 +18,20 @@ public class Perseguidor : Enemy
     [SerializeField] private float magnitudeWaypointsWalkAroundTheTarget = 1.0f;
     private float auxDelayWaitInWalkAroundTheTarget;
 
-
     [SerializeField] private CurrentBehaviourPerseguidor currentBehaviourPerseguidor = CurrentBehaviourPerseguidor.None;
     [SerializeField] private WalkAroundTheTargetSTATES walkAroundTheTargetSTATES = WalkAroundTheTargetSTATES.None;
+
+    public static event Action<float, Transform> OnDamagePerseguidor;
+
+    void OnEnable()
+    {
+        Weapon.HitDamage += OnHitMe;
+    }
+
+    void OnDisable()
+    {
+        Weapon.HitDamage -= OnHitMe;
+    }
 
     public enum CurrentBehaviourPerseguidor
     {
@@ -121,7 +132,7 @@ public class Perseguidor : Enemy
                 break;
         }
     }
-
+    
     private void Idle()
     {
         if (startBehaviour)
@@ -135,7 +146,6 @@ public class Perseguidor : Enemy
         switch (currentBehaviourPerseguidor)
         {
             case CurrentBehaviourPerseguidor.AttackTarget:
-                Debug.Log("SI");
                 fsmEnemy.SendEvent((int)Perseguidor_EVENTS.AssignedAttackTargetBehaviour);
                 break;
             case CurrentBehaviourPerseguidor.PatrolInRange:
@@ -171,7 +181,6 @@ public class Perseguidor : Enemy
 
     private void RunToTarget()
     {
-        Debug.Log("ENTRE A PERSEGUIR AL PLAYER");
         navMeshAgent.speed = speedRunToTarget;
         navMeshAgent.acceleration = speedRunToTarget * 2;
         navMeshAgent.isStopped = false;
@@ -200,7 +209,8 @@ public class Perseguidor : Enemy
 
             if (Physics.Raycast(transform.position, transform.forward, out hit, 5, layerPlayer))
             {
-                Debug.Log("Hice daño");
+                if(OnDamagePerseguidor != null)
+                    OnDamagePerseguidor(damagePerseguidor, CurrentTarget);
             }
         }
         float distance = Vector3.Distance(transform.position, CurrentTarget.position);
@@ -215,7 +225,7 @@ public class Perseguidor : Enemy
 
     private void Die()
     {
-        Destroy(gameObject);
+        healthSystem.CheckDie();
     }
 
     private void CheckLifeOut()
@@ -223,6 +233,14 @@ public class Perseguidor : Enemy
         if (healthSystem.CheckDie())
         {
             fsmEnemy.SendEvent((int)Perseguidor_EVENTS.LifeOut);
+        }
+    }
+
+    private void OnHitMe(Weapon weaponHitMe, Transform _transform)
+    {
+        if (transform == _transform)
+        {
+            healthSystem.SubstractLife(weaponHitMe.GetDamage());
         }
     }
 

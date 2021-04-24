@@ -46,6 +46,8 @@ public class FPSController : MonoBehaviour
 
     void Start()
     {
+        crouchToggle = DataManager.instance.GetPlayerToggleCrouch();
+        sprintToggle = DataManager.instance.GetPlayerToggleSprint();
         controller = GetComponent<CharacterController>();
         crouchedHeadPos = camera.transform.position.y - 0.7f;
     }

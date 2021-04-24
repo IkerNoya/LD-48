@@ -5,16 +5,13 @@ using UnityEngine;
 public class SpawnerEnemy : MonoBehaviour
 {
     [SerializeField] private List<Spawn> spawnPositions;
-
     [SerializeField] private GameObject enemyPrefab;
-
     [SerializeField] private List<GameObject> enemys;
 
     private void Awake()
     {
         enemys.Clear();
     }
-
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.E))
@@ -22,7 +19,6 @@ public class SpawnerEnemy : MonoBehaviour
             ChooseSpawn();
         }
     }
-
     private void ChooseSpawn()
     {
         Spawn choosedSpawn = spawnPositions[Random.Range(0, spawnPositions.Count)];
