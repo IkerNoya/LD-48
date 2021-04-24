@@ -8,6 +8,9 @@ public class DataManager : MonoBehaviour
 
     [SerializeField]private float musicVolume;
     [SerializeField]private float sfxVolume;
+
+    [SerializeField] private bool playerCrouch;
+    [SerializeField] private bool playerSprint;
     void Awake()
     {
         if(instance != null)
@@ -35,6 +38,25 @@ public class DataManager : MonoBehaviour
     public float GetSFXVolume()
     {
         return sfxVolume;
+    }
+    #endregion
+
+    #region PLAYER OPTIONS
+    public void SetTogglePlayerCrouch(bool value)
+    {
+        playerCrouch = value;
+    }
+    public void SetTogglePlayerSprint(bool value)
+    {
+        playerSprint = value;
+    }
+    public bool GetPlayerToggleCrouch()
+    {
+        return playerCrouch;
+    }
+    public bool GetPlayerToggleSprint()
+    {
+        return playerSprint;
     }
     #endregion
 }
