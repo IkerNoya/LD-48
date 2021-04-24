@@ -3,23 +3,43 @@ using UnityEngine;
 
 public class Perseguidor : Enemy
 {
-    [SerializeField] private float speedWalkAroundTheTarget;
+    public enum CurrentBehaviourPerseguidor
+    {
+        None,
+        AttackTarget,
+    }
+
+    enum Perseguidor_STATES
+    {
+        Idle,
+        InitPerseguidor,
+        RunToTarget,
+        AttackTarget,
+        Die,
+        Count,
+    }
+
+    enum Perseguidor_EVENTS
+    {
+        StartBehaviour,
+        AssignedAttackTargetBehaviour,
+        StartBehaviourAttack,
+        InRangeAttack,
+        OutRangeAttack,
+        LifeOut,
+        Count,
+    }
+
     [SerializeField] private float speedRunToTarget;
-    [SerializeField] private float speedZigZagToTarget;
     [SerializeField] private float damagePerseguidor;
     [SerializeField] private float rangeToAttack;
     [SerializeField] private float delayAttack;
+    [SerializeField] private bool loockAtTargetInAttack;
     private float auxDelayAttack;
 
+    [SerializeField] private Rigidbody rig;
     [SerializeField] private LayerMask layerPlayer;
-    [SerializeField] private float rangeToTargetWalkAroundTheTargert;
-    [SerializeField] private float rangeModifyAssignedWaypoint;
-    [SerializeField] private float delayWaitInWalkAroundTheTarget;
-    [SerializeField] private float magnitudeWaypointsWalkAroundTheTarget = 1.0f;
-    private float auxDelayWaitInWalkAroundTheTarget;
-
     [SerializeField] private CurrentBehaviourPerseguidor currentBehaviourPerseguidor = CurrentBehaviourPerseguidor.None;
-    [SerializeField] private WalkAroundTheTargetSTATES walkAroundTheTargetSTATES = WalkAroundTheTargetSTATES.None;
 
     public static event Action<float, Transform> OnDamagePerseguidor;
 
@@ -33,45 +53,6 @@ public class Perseguidor : Enemy
         Weapon.HitDamage -= OnHitMe;
     }
 
-    public enum CurrentBehaviourPerseguidor
-    {
-        None,
-        PatrolInRange,
-        AttackTarget,
-    }
-
-    enum WalkAroundTheTargetSTATES
-    {
-        None,
-        AssignedWaypoint,
-        GoToWaypoint,
-        Wait,
-    }
-
-    enum Perseguidor_STATES
-    {
-        Idle,
-        InitPerseguidor,
-        WalkAroundTheTarget,
-        RunToTarget,
-        ZigZagToTarget,
-        AttackTarget,
-        Die,
-        Count,
-    }
-
-    enum Perseguidor_EVENTS
-    {
-        StartBehaviour,
-        AssignedPatrolInRangeBehaviour,
-        AssignedAttackTargetBehaviour,
-        StartBehaviourAttack,
-        ZigZagEvent,
-        InRangeAttack,
-        OutRangeAttack,
-        LifeOut,
-        Count,
-    }
 
     void Awake()
     {
@@ -79,30 +60,22 @@ public class Perseguidor : Enemy
 
         fsmEnemy.SetRelations((int)Perseguidor_STATES.Idle, (int)Perseguidor_STATES.InitPerseguidor, (int)Perseguidor_EVENTS.StartBehaviour);
 
-        fsmEnemy.SetRelations((int)Perseguidor_STATES.InitPerseguidor, (int)Perseguidor_STATES.WalkAroundTheTarget, (int)Perseguidor_EVENTS.AssignedPatrolInRangeBehaviour);
         fsmEnemy.SetRelations((int)Perseguidor_STATES.InitPerseguidor, (int)Perseguidor_STATES.RunToTarget, (int)Perseguidor_EVENTS.AssignedAttackTargetBehaviour);
 
-        fsmEnemy.SetRelations((int)Perseguidor_STATES.WalkAroundTheTarget, (int)Perseguidor_STATES.RunToTarget, (int)Perseguidor_EVENTS.StartBehaviourAttack);
-
-        fsmEnemy.SetRelations((int)Perseguidor_STATES.RunToTarget, (int)Perseguidor_STATES.ZigZagToTarget, (int)Perseguidor_EVENTS.ZigZagEvent);
         fsmEnemy.SetRelations((int)Perseguidor_STATES.RunToTarget, (int)Perseguidor_STATES.AttackTarget, (int)Perseguidor_EVENTS.InRangeAttack);
-
-        fsmEnemy.SetRelations((int)Perseguidor_STATES.ZigZagToTarget, (int)Perseguidor_STATES.AttackTarget, (int)Perseguidor_EVENTS.InRangeAttack);
 
         fsmEnemy.SetRelations((int)Perseguidor_STATES.AttackTarget, (int)Perseguidor_STATES.RunToTarget, (int)Perseguidor_EVENTS.OutRangeAttack);
 
         fsmEnemy.SetRelations((int)Perseguidor_STATES.Idle, (int)Perseguidor_STATES.Die, (int)Perseguidor_EVENTS.LifeOut);
         fsmEnemy.SetRelations((int)Perseguidor_STATES.InitPerseguidor, (int)Perseguidor_STATES.Die, (int)Perseguidor_EVENTS.LifeOut);
-        fsmEnemy.SetRelations((int)Perseguidor_STATES.WalkAroundTheTarget, (int)Perseguidor_STATES.Die, (int)Perseguidor_EVENTS.LifeOut);
         fsmEnemy.SetRelations((int)Perseguidor_STATES.RunToTarget, (int)Perseguidor_STATES.Die, (int)Perseguidor_EVENTS.LifeOut);
-        fsmEnemy.SetRelations((int)Perseguidor_STATES.ZigZagToTarget, (int)Perseguidor_STATES.Die, (int)Perseguidor_EVENTS.LifeOut);
         fsmEnemy.SetRelations((int)Perseguidor_STATES.AttackTarget, (int)Perseguidor_STATES.Die, (int)Perseguidor_EVENTS.LifeOut);
     }
 
-    void Start()
+    protected override void Start()
     {
+        base.Start();
         auxDelayAttack = delayAttack;
-        auxDelayWaitInWalkAroundTheTarget = delayWaitInWalkAroundTheTarget;
     }
 
     void Update()
@@ -115,14 +88,8 @@ public class Perseguidor : Enemy
             case (int)Perseguidor_STATES.InitPerseguidor:
                 InitPerseguidor();
                 break;
-            case (int)Perseguidor_STATES.WalkAroundTheTarget:
-                WalkAroundTheTarget();
-                break;
             case (int)Perseguidor_STATES.RunToTarget:
                 RunToTarget();
-                break;
-            case (int)Perseguidor_STATES.ZigZagToTarget:
-                ZigZagToTarget();
                 break;
             case (int)Perseguidor_STATES.AttackTarget:
                 AttackTarget();
@@ -148,35 +115,8 @@ public class Perseguidor : Enemy
             case CurrentBehaviourPerseguidor.AttackTarget:
                 fsmEnemy.SendEvent((int)Perseguidor_EVENTS.AssignedAttackTargetBehaviour);
                 break;
-            case CurrentBehaviourPerseguidor.PatrolInRange:
-                fsmEnemy.SendEvent((int)Perseguidor_EVENTS.AssignedPatrolInRangeBehaviour);
-                break;
         }
-    }
-
-    private void WalkAroundTheTarget()
-    {
-        switch (currentBehaviourPerseguidor)
-        {
-            case CurrentBehaviourPerseguidor.AttackTarget:
-
-                break;
-            case CurrentBehaviourPerseguidor.PatrolInRange:
-
-                switch (walkAroundTheTargetSTATES)
-                {
-                    case WalkAroundTheTargetSTATES.AssignedWaypoint:
-
-                        break;
-                    case WalkAroundTheTargetSTATES.GoToWaypoint:
-
-                        break;
-                    case WalkAroundTheTargetSTATES.Wait:
-                       
-                        break;
-                }
-                break;
-        }
+        CheckLifeOut();
     }
 
     private void RunToTarget()
@@ -197,6 +137,17 @@ public class Perseguidor : Enemy
 
     private void AttackTarget()
     {
+        navMeshAgent.speed = 0;
+        navMeshAgent.acceleration = 1000;
+        navMeshAgent.isStopped = true;
+        //navMeshAgent.enabled = false;
+
+        rig.velocity = Vector3.zero;
+        rig.angularVelocity = Vector3.zero;
+
+        if(loockAtTargetInAttack)
+            transform.LookAt(new Vector3(CurrentTarget.position.x, transform.position.y , CurrentTarget.position.z));
+
         if (delayAttack > 0)
         {
             delayAttack = delayAttack - Time.deltaTime;
@@ -205,12 +156,17 @@ public class Perseguidor : Enemy
         {
             delayAttack = auxDelayAttack;
 
-            RaycastHit hit;
+            Vector3 scale = new Vector3(rangeToAttack + 1, 0, rangeToAttack + 1);
 
-            if (Physics.Raycast(transform.position, transform.forward, out hit, 5, layerPlayer))
+            Collider[] collidersOverlap = Physics.OverlapBox(transform.position, transform.localScale + scale, Quaternion.identity, layerPlayer);
+
+            for (int i = 0; i < collidersOverlap.Length; i++)
             {
-                if(OnDamagePerseguidor != null)
-                    OnDamagePerseguidor(damagePerseguidor, CurrentTarget);
+                if (collidersOverlap[i] != null)
+                {
+                    if(OnDamagePerseguidor != null)
+                        OnDamagePerseguidor(damagePerseguidor, collidersOverlap[i].transform);
+                }
             }
         }
         float distance = Vector3.Distance(transform.position, CurrentTarget.position);
@@ -221,11 +177,9 @@ public class Perseguidor : Enemy
         CheckLifeOut();
     }
 
-    private void ZigZagToTarget(){}
-
     private void Die()
     {
-        healthSystem.CheckDie();
+        healthSystem.CheckDieEvent();
     }
 
     private void CheckLifeOut()

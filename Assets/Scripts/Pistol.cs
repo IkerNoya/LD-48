@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Pistol : Weapon
 {
-    int currentAmmo;
     
     void Start()
     {
@@ -30,20 +29,5 @@ public class Pistol : Weapon
 
 
     }
-    IEnumerator Reload(float timer)
-    {
-        canShoot = false;
-        yield return new WaitForSeconds(timer);
-        currentAmmo = ammo;
-        canShoot = true;
-        yield return null;
-    }
-    public int GetMaxAmmo()
-    {
-        return ammo;
-    }
-    public int GetCurrentAmmo()
-    {
-        return currentAmmo;
-    }
+
 }

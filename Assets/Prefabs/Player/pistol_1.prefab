@@ -93,6 +93,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e29fe273de0e1e40a916d363c76e6fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ammoType: 1
   ammo: 12
   fireRate: 0.25
   damage: 30
@@ -107,6 +108,8 @@ MonoBehaviour:
   mouseLook: {fileID: 0}
   fire: {fileID: 0}
   reload: {fileID: 0}
+  spreadXValues: []
+  spreadYValues: []
 --- !u!1 &5110783328918657652
 GameObject:
   m_ObjectHideFlags: 0
