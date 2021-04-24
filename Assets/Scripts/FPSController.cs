@@ -11,8 +11,7 @@ public class FPSController : MonoBehaviour
     [SerializeField] float groundDistance;
     [SerializeField] float jumpHeight;
     [SerializeField] Transform groundCheck;
-    [SerializeField] Transform Head;
-    [SerializeField] Transform CrouchedHead;
+    [SerializeField] Transform head;
     [SerializeField] LayerMask groundMask;
 
     public bool crouchToggle;
@@ -23,6 +22,7 @@ public class FPSController : MonoBehaviour
 
     float gravity = -9.81f * 2;
     float yNegativeVelocity = -2;
+    float crouchedHeadPos;
 
     Vector3 movement;
     Vector3 velocity;
@@ -35,6 +35,7 @@ public class FPSController : MonoBehaviour
     {
         controller = GetComponent<CharacterController>();
         camera = Camera.main.gameObject;
+        crouchedHeadPos = camera.transform.position.y - 0.5f;
     }
 
     void Update()
@@ -56,7 +57,7 @@ public class FPSController : MonoBehaviour
 
         Inputs();
         Movement();
-        HeadMovement();
+        Crouch();
     }
     void Inputs()
     {
@@ -119,18 +120,19 @@ public class FPSController : MonoBehaviour
         if (!isSprinting && !isCrouched)
             controller.Move(movement * speed * Time.deltaTime);
     }
-    void HeadMovement()
+    void Crouch()
     {
         float height = camera.transform.position.y;
-        if (isCrouched && height >= CrouchedHead.position.y)
+        if (isCrouched && height >= crouchedHeadPos)
             height -= Time.deltaTime * crouchSpeed;
         else if(!isCrouched)
         {
-            if (height < Head.position.y)
+            if (height < head.position.y)
                 height += Time.deltaTime * crouchSpeed;
             else
                 return;
         }
+        Debug.Log(height);
         camera.transform.position = new Vector3(camera.transform.position.x, height, camera.transform.position.z);
     }
 }
