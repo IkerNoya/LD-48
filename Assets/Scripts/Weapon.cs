@@ -4,15 +4,36 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] protected int ammo;
 
-    // Update is called once per frame
-    void Update()
+    [SerializeField] protected float fireRate;
+    [SerializeField] protected float damage;
+    [SerializeField] protected float recoil;
+    [SerializeField] protected float range;
+
+    protected bool canShoot = true;
+
+    protected float shootTimer = 0;
+
+    protected void Shoot(ref int currentAmmo)
     {
-        
+        Ray ray;
+        RaycastHit hit;
+        if(Physics.Raycast(transform.position, Input.mousePosition, out hit, range))
+        {
+            //hit target
+            if (hit.collider.CompareTag("enemy"))
+            {
+                //blood particle
+                //damage
+            }
+            else
+            {
+                //spark particle
+            }
+        }
+        currentAmmo--;
+        shootTimer = fireRate;
+        Debug.Log("Pew Pew");
     }
 }

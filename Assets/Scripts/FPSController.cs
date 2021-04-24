@@ -68,7 +68,6 @@ public class FPSController : MonoBehaviour
             timeWalking = 0;
 
         
-        Debug.Log(timeWalking);
         //jump + artificial gravity
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
