@@ -23,7 +23,10 @@ public class HealthSystem : MonoBehaviour
 
     public void CheckDieEvent()
     {
-        OnDie?.Invoke();
+        if (life <= 0)
+        {
+            OnDie?.Invoke();
+        }
     }
 
     public void ResetLife()
