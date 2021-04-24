@@ -9,6 +9,7 @@ public class MouseLook : MonoBehaviour
     [SerializeField] Transform body;
 
     float xRotation = 0;
+
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
