@@ -26,7 +26,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2622494409725564256}
-  m_LocalRotation: {x: -0.00000003774895, y: -1.11022296e-16, z: 1.11022296e-16, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.42, y: -0.23, z: 0.89}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_Children:
@@ -93,16 +93,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e29fe273de0e1e40a916d363c76e6fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ammo: 15
+  ammo: 12
   fireRate: 0.25
   damage: 30
-  recoil: 0
+  verticalRecoil: 0
+  horizontalRecoil: 0
   range: 20
   muzzleFlash: {fileID: 4922931558555236284}
   hitEnvironment: {fileID: 198000013440722320, guid: 21f7af22211a8014eaabf05b5f40a230,
     type: 3}
   hitEnemy: {fileID: 198000013597187216, guid: 94dc235995569f14ea4c1825ababab62, type: 3}
   cam: {fileID: 0}
+  fire: {fileID: 0}
+  reload: {fileID: 0}
 --- !u!1001 &5111211592858081036
 PrefabInstance:
   m_ObjectHideFlags: 0

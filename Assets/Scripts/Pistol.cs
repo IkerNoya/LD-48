@@ -16,10 +16,14 @@ public class Pistol : Weapon
         if (Input.GetKey(KeyCode.Mouse0) && canShoot && shootTimer<=0 && currentAmmo>0)
         {
             Shoot(ref currentAmmo);
+            if (fire != null)
+                fire.Play();
         }
         if(Input.GetKeyDown(KeyCode.R) && currentAmmo < ammo)
         {
             StartCoroutine(Reload(2));
+            if (reload != null)
+                reload.Play();
         }
         shootTimer -= Time.deltaTime;
 
