@@ -332,7 +332,7 @@ GameObject:
   - component: {fileID: 2703828737639698361}
   - component: {fileID: 2703828737639698366}
   m_Layer: 0
-  m_Name: Monstruo
+  m_Name: Perseguidor
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
