@@ -21,6 +21,8 @@ public class Perseguidor : Enemy
     [SerializeField] private CurrentBehaviourPerseguidor currentBehaviourPerseguidor = CurrentBehaviourPerseguidor.None;
     [SerializeField] private WalkAroundTheTargetSTATES walkAroundTheTargetSTATES = WalkAroundTheTargetSTATES.None;
 
+    public static event Action<float, Transform> OnDamagePerseguidor;
+
     void OnEnable()
     {
         Weapon.HitDamage += OnHitMe;
@@ -207,7 +209,8 @@ public class Perseguidor : Enemy
 
             if (Physics.Raycast(transform.position, transform.forward, out hit, 5, layerPlayer))
             {
-                Debug.Log("Hice daño");
+                if(OnDamagePerseguidor != null)
+                    OnDamagePerseguidor(damagePerseguidor, CurrentTarget);
             }
         }
         float distance = Vector3.Distance(transform.position, CurrentTarget.position);
@@ -222,7 +225,7 @@ public class Perseguidor : Enemy
 
     private void Die()
     {
-        Destroy(gameObject);
+        healthSystem.CheckDie();
     }
 
     private void CheckLifeOut()
