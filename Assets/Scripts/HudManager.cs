@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class HudManager : MonoBehaviour
 {
     //generalize to weapons later
-    [SerializeField] Bailif weapon;
+    [SerializeField] Weapon weapon;
     [SerializeField] Text ammo;
     void Start()
     {
