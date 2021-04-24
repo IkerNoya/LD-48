@@ -2,13 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameMnager : MonoBehaviour
+public class GameManager : MonoBehaviour
 {
-    private static GameMnager instance;
-    public static GameMnager Get()
+    private static GameManager instance;
+    public static GameManager Get()
     {
         return instance;
     }
+
+    private bool isPaused;
+
     void Awake()
     {
         if(instance != null)
@@ -28,7 +31,7 @@ public class GameMnager : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Escape))
         {
-
+            Time.timeScale = 0;
         }
     }
 }
