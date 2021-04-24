@@ -13,7 +13,7 @@ public class Pistol : Weapon
 
     void Update()
     {
-        if (Input.GetKey(KeyCode.Mouse0) && canShoot && shootTimer<=0)
+        if (Input.GetKey(KeyCode.Mouse0) && canShoot && shootTimer<=0 && currentAmmo>0)
         {
             Shoot(ref currentAmmo);
         }
@@ -22,6 +22,8 @@ public class Pistol : Weapon
             StartCoroutine(Reload(2));
         }
         shootTimer -= Time.deltaTime;
+
+
     }
     IEnumerator Reload(float timer)
     {
