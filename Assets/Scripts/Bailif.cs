@@ -7,18 +7,6 @@ public class Bailif : Weapon
     void Start()
     {
         currentAmmo = ammo;
-        float counterX = 0;
-        float counterY = 0;
-        for (int i = 0; i < 8; i++)
-        {
-            spreadXValues.Add(-spreadX + counterX);
-            counterX += 0.1f;
-        }
-        for (int i = 0; i < 8; i++)
-        {
-            spreadYValues.Add(-spreadY + counterY);
-            counterY += 0.01f;
-        }
     }
 
     void Update()

@@ -24,13 +24,11 @@ public class Weapon : MonoBehaviour
     [Space]
     [SerializeField] protected AudioSource fire;
     [SerializeField] protected AudioSource reload;
-
-    [SerializeField] protected List<float> spreadXValues = new List<float>();
-    [SerializeField] protected List<float> spreadYValues = new List<float>();
+    [Space]
+    [SerializeField] protected float spreadX = 0.25f;
+    [SerializeField] protected float spreadY = 0.03f;
  
 
-    protected float spreadX = 0.25f;
-    protected float spreadY = 0.03f;
 
     int pellets = 8;
 
@@ -76,7 +74,7 @@ public class Weapon : MonoBehaviour
                 Vector3 direction = ray.direction;
                 for(int i = 0; i < pellets; i++)
                 {
-                    spread = new Vector3(direction.x + spreadXValues[UnityEngine.Random.Range(0,pellets)], direction.y + spreadYValues[UnityEngine.Random.Range(0, pellets)], direction.z);
+                    spread = new Vector3(direction.x + UnityEngine.Random.Range(-spreadX, spreadX), direction.y + UnityEngine.Random.Range(-spreadY, spreadY), direction.z);
                     if (Physics.Raycast(ray.origin, spread, out hit, range))
                     {
                         //hit target
