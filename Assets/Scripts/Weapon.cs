@@ -9,17 +9,25 @@ public class Weapon : MonoBehaviour
 
     [SerializeField] protected float fireRate;
     [SerializeField] protected float damage;
-    [SerializeField] protected float recoil;
+    [Space]
+    [SerializeField] protected float verticalRecoil;
+    [SerializeField] protected float horizontalRecoil;
+    [Space]
     [SerializeField] protected float range;
+    [Space]
     [SerializeField] protected ParticleSystem muzzleFlash;
     [SerializeField] protected ParticleSystem hitEnvironment;
     [SerializeField] protected ParticleSystem hitEnemy;
     [SerializeField] protected Camera cam;
+    [Space]
+    [SerializeField] protected AudioSource fire;
+    [SerializeField] protected AudioSource reload;
+
     protected bool canShoot = true;
 
     protected float shootTimer = 0;
 
-    public static event Action<Weapon> HitDamage;
+    public static event Action<Weapon, Transform> HitDamage;
 
     protected void Shoot(ref int currentAmmo)
     {
@@ -33,7 +41,7 @@ public class Weapon : MonoBehaviour
             if (hit.collider.CompareTag("Enemy"))
             {
                 Instantiate(hitEnemy, hit.point, Quaternion.LookRotation(hit.normal));
-                HitDamage?.Invoke(this);
+                HitDamage?.Invoke(this, hit.transform);
             }
             else
             {
@@ -43,5 +51,13 @@ public class Weapon : MonoBehaviour
         muzzleFlash.Play();
         currentAmmo--;
         shootTimer = fireRate;
+    }
+    protected void Recoil(float recoilValue)
+    {
+
+    }
+    public float GetDamage()
+    {
+        return damage;
     }
 }
