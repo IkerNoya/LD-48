@@ -17,7 +17,6 @@ public class Spawn : MonoBehaviour
         minRangeZ = transform.position.z - valueRange;
         maxRangeZ = transform.position.z + valueRange;
     }
-    
     public float GetMinX()
     {
         return minRangeX;
