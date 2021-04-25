@@ -80,7 +80,7 @@ public class Weapon : MonoBehaviour
                         //hit target
                         if (hit.collider.CompareTag("Enemy"))
                         {
-                            Instantiate(hitEnemy, hit.point, Quaternion.LookRotation(hit.normal));
+                            Instantiate(hitEnemy, hit.point, Quaternion.LookRotation(hit.normal),hit.transform);
                             HitDamage?.Invoke(this, hit.transform);
                         }
                         else

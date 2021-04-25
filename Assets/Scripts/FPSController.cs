@@ -19,6 +19,7 @@ public class FPSController : MonoBehaviour
     [SerializeField] float standingHeadBobVerticalAmplitude;
     [Space]
     [SerializeField] float slowMotionAmmount;
+    [SerializeField] float slowMotionRecovery;
     [Space]
     [SerializeField] Transform groundCheck;
     [SerializeField] Transform head;
@@ -30,6 +31,7 @@ public class FPSController : MonoBehaviour
     public bool sprintToggle;
 
     CharacterController controller;
+    TimeManager timeManager;
 
     float gravity = -9.81f * 2;
     float yNegativeVelocity = -2;
@@ -55,10 +57,12 @@ public class FPSController : MonoBehaviour
         controller = GetComponent<CharacterController>();
         crouchedHeadPos = camera.transform.position.y - 0.7f;
         currentSlowMotionAmmount = slowMotionAmmount;
+        timeManager = TimeManager.Instance;
     }
 
     void Update()
     {
+        Debug.Log(Time.timeScale);
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
 
         if (isGrounded && velocity.y < 0)
@@ -78,6 +82,16 @@ public class FPSController : MonoBehaviour
         //jump + artificial gravity
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
+
+        if (isSlowMotionActivated) timeManager.SlowMotion(ref currentSlowMotionAmmount, isSlowMotionActivated);
+        else
+        {
+            timeManager.SlowMotion(ref currentSlowMotionAmmount, isSlowMotionActivated);
+            if (currentSlowMotionAmmount < slowMotionAmmount) 
+                currentSlowMotionAmmount += Time.deltaTime * slowMotionRecovery;
+        }
+        if (currentSlowMotionAmmount <= 0) isSlowMotionActivated = false;
+
         Inputs();
         Movement();
         Crouch();
@@ -136,9 +150,13 @@ public class FPSController : MonoBehaviour
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity); // jump formula: result = sqrt( h * -2 * g)
 
         //slow motion
-        if(Input.GetKeyDown(KeyCode.F) && currentSlowMotionAmmount > slowMotionAmmount - ((slowMotionAmmount * 100) / 20))
+        if(Input.GetKeyDown(KeyCode.F) && currentSlowMotionAmmount > slowMotionAmmount/4 && !isSlowMotionActivated)
         {
-
+            isSlowMotionActivated = true;
+        }
+        else if(Input.GetKeyDown(KeyCode.F) && isSlowMotionActivated)
+        {
+            isSlowMotionActivated = false;
         }
     }
     void Movement()
@@ -208,5 +226,9 @@ public class FPSController : MonoBehaviour
                 offset = crouchCamPos.transform.up * movement;
         }
         return offset;
+    }
+    public float GetSlowMotionAmmount()
+    {
+        return currentSlowMotionAmmount;
     }
 }
