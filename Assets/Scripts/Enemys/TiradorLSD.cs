@@ -107,19 +107,19 @@ public class TiradorLSD : Enemy
         switch (fsmEnemy.GetCurrentState())
         {
             case (int)TiradorLSD_STATES.Idle:
-                Idle();
+                Idle(); // IDLE
                 break;
             case (int)TiradorLSD_STATES.SelectorAction:
-                SelectorAction();
+                SelectorAction(); //SELECCIONA SI TELETRASPORTARSE O DISPARAR (MANDALE IDLE)
                 break;
             case (int)TiradorLSD_STATES.Attack:
-                Attack();
+                Attack(); // DISPARA CONTRA EL JUEGADOR
                 break;
             case (int)TiradorLSD_STATES.Teleport:
-                Teleport();
+                Teleport(); //SE TELETRASPORTA 
                 break;
             case (int)TiradorLSD_STATES.Die:
-                Die();
+                Die(); // C MUERE EL ENEMIGO
                 break;
         }
     }
