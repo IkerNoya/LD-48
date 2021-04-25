@@ -28,14 +28,14 @@ public class TimeManager : MonoBehaviour
         if (isActivated)
         {
             if(time<1)
-                time += Time.timeScale;
+                time += Time.timeScale / 15;
             slowMotion = slowMotionValue.Evaluate(time);
             slowMotionAmmount -= Time.deltaTime * decreaseSpeed;
         }
         else
         {
             if(time>0)
-                time -= Time.timeScale /60;
+                time -= Time.timeScale /20;
             slowMotion = slowMotionValue.Evaluate(time);
         }
         Time.timeScale = slowMotion;

@@ -25,7 +25,6 @@ public class Bailif : Weapon
                 reload.Play();
         }
         fire.pitch = Time.timeScale;
-        Debug.Log(fire.pitch);
         shootTimer -= Time.deltaTime;
     }
 
