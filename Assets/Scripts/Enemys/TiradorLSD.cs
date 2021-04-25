@@ -47,6 +47,7 @@ public class TiradorLSD : Enemy
     [SerializeField] private float addHeightInTeleport;
 
     private float auxDelayShoot;
+    Animator anim;
 
     void OnEnable()
     {
@@ -83,6 +84,8 @@ public class TiradorLSD : Enemy
 
         auxDelayShoot = delayShoot;
 
+        anim = GetComponent<Animator>();
+
         countShootForSwitchSlectorActionState = Random.Range(minCountShootForSwitchSlectorActionState, maxCountShootForSwitchSlectorActionState);
 
         GameObject[] positionGeneratorsBasedMyPositions_GO = GameObject.FindGameObjectsWithTag(tagGeneratorPosition);
@@ -101,7 +104,6 @@ public class TiradorLSD : Enemy
         }
     }
 
-    // Update is called once per frame
     void Update()
     {
         switch (fsmEnemy.GetCurrentState())
@@ -128,6 +130,7 @@ public class TiradorLSD : Enemy
     {
         if (startBehaviour)
         {
+            anim.SetBool("Idle", true);
             fsmEnemy.SendEvent((int)TiradorLSD_EVENTS.StartBehaviour);
         }
     }
@@ -169,17 +172,8 @@ public class TiradorLSD : Enemy
             }
             else
             {
-                delayShoot = auxDelayShoot;
-                Bullet bullet = Instantiate(originalObject.gameObject, spawnProjectiles.transform.position, spawnProjectiles.transform.rotation).GetComponent<Bullet>();
-                bullet.SetDirection(bullet.transform.forward);
-                bullet.SetDamage(damageBulletTirador);
-                bullet.SetSpeed(speedBulletTirador);
-                countShootForSwitchSlectorActionState--;
-                if (countShootForSwitchSlectorActionState <= 0)
-                {
-                    countShootForSwitchSlectorActionState = Random.Range(minCountShootForSwitchSlectorActionState, maxCountShootForSwitchSlectorActionState);
-                    fsmEnemy.SendEvent((int)TiradorLSD_EVENTS.ChangeSelectorAction);
-                }
+                anim.SetTrigger("Attack");
+                
             }
         }
 
@@ -195,6 +189,7 @@ public class TiradorLSD : Enemy
     
     private void Die()
     {
+        anim.SetTrigger("Die");
         healthSystem.CheckDieEvent();
     }
 
@@ -210,5 +205,20 @@ public class TiradorLSD : Enemy
     {
         int indexPosition = Random.Range(0, positionGeneratorsBasedMyPositions.Count);
         transform.position = positionGeneratorsBasedMyPositions[indexPosition].GetPositionGenerated() + new Vector3(0, addHeightInTeleport, 0);
+    }
+
+    public void FireProjectile()
+    {
+        delayShoot = auxDelayShoot;
+        Bullet bullet = Instantiate(originalObject.gameObject, spawnProjectiles.transform.position, spawnProjectiles.transform.rotation).GetComponent<Bullet>();
+        bullet.SetDirection(bullet.transform.forward);
+        bullet.SetDamage(damageBulletTirador);
+        bullet.SetSpeed(speedBulletTirador);
+        countShootForSwitchSlectorActionState--;
+        if (countShootForSwitchSlectorActionState <= 0)
+        {
+            countShootForSwitchSlectorActionState = Random.Range(minCountShootForSwitchSlectorActionState, maxCountShootForSwitchSlectorActionState);
+            fsmEnemy.SendEvent((int)TiradorLSD_EVENTS.ChangeSelectorAction);
+        }
     }
 }
