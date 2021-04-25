@@ -116,7 +116,7 @@ public class Perseguidor : Enemy
                 fsmEnemy.SendEvent((int)Perseguidor_EVENTS.AssignedAttackTargetBehaviour);
                 break;
         }
-        CheckLifeOut();
+        CheckLifeOut((int)Perseguidor_EVENTS.LifeOut);
     }
 
     private void RunToTarget()
@@ -132,7 +132,7 @@ public class Perseguidor : Enemy
         {
             fsmEnemy.SendEvent((int)Perseguidor_EVENTS.InRangeAttack);
         }
-        CheckLifeOut();
+        CheckLifeOut((int)Perseguidor_EVENTS.LifeOut);
     }
 
     private void AttackTarget()
@@ -174,20 +174,12 @@ public class Perseguidor : Enemy
         {
             fsmEnemy.SendEvent((int)Perseguidor_EVENTS.OutRangeAttack);
         }
-        CheckLifeOut();
+        CheckLifeOut((int)Perseguidor_EVENTS.LifeOut);
     }
 
     private void Die()
     {
         healthSystem.CheckDieEvent();
-    }
-
-    private void CheckLifeOut()
-    {
-        if (healthSystem.CheckDie())
-        {
-            fsmEnemy.SendEvent((int)Perseguidor_EVENTS.LifeOut);
-        }
     }
 
     private void OnHitMe(Weapon weaponHitMe, Transform _transform)

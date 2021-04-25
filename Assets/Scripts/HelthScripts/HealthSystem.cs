@@ -33,4 +33,7 @@ public class HealthSystem : MonoBehaviour
     {
         life = maxLife;
     }
+
+
+    public float GetLife() { return life; }
 }
