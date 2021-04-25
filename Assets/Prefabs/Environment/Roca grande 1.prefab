@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7644500838474739757}
   m_Layer: 0
   m_Name: Roca grande 1
-  m_TagString: Untagged
+  m_TagString: Environment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -58,7 +58,7 @@ GameObject:
   - component: {fileID: 5673672839458048391}
   m_Layer: 0
   m_Name: roca6
-  m_TagString: Untagged
+  m_TagString: Environment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

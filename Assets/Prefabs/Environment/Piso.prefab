@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 6860148417256381606}
   m_Layer: 10
   m_Name: piso
-  m_TagString: Ground
+  m_TagString: Environment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

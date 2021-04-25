@@ -58,7 +58,7 @@ GameObject:
   - component: {fileID: 3536760027041260344}
   m_Layer: 0
   m_Name: atbol_1
-  m_TagString: Untagged
+  m_TagString: Environment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
