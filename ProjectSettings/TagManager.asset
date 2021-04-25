@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - Environment
   - GeneratorBasedMyPosition
+  - Lava
   layers:
   - Default
   - TransparentFX
