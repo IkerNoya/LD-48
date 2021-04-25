@@ -28,7 +28,7 @@ public class TimeManager : MonoBehaviour
         if (isActivated)
         {
             if(time<1)
-                time += Time.timeScale /40;
+                time += Time.timeScale;
             slowMotion = slowMotionValue.Evaluate(time);
             slowMotionAmmount -= Time.deltaTime * decreaseSpeed;
         }
