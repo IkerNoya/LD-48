@@ -24,4 +24,11 @@ public class Enemy : MonoBehaviour
         CurrentTarget = go.transform;
     }
 
+    protected void CheckLifeOut(int sendEventLifeOut)
+    {
+        if (healthSystem.CheckDie())
+        {
+            fsmEnemy.SendEvent(sendEventLifeOut);
+        }
+    }
 }
