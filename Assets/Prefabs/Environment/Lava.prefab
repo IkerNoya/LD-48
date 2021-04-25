@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8094639406470150701}
   - component: {fileID: 8094639406470150698}
   - component: {fileID: 8094639406470150699}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -102,9 +102,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8094639407308611000}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Lava
-  m_TagString: Untagged
+  m_TagString: Environment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

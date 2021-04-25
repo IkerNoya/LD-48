@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4962651081578936312}
   - component: {fileID: 7734860869930301135}
   - component: {fileID: 4508030446904392152}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: polySurface92
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -90,7 +90,7 @@ GameObject:
   - component: {fileID: 4205669784447205283}
   - component: {fileID: 124268110400830037}
   - component: {fileID: 4509213864833417568}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: polySurface69
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -169,7 +169,7 @@ GameObject:
   - component: {fileID: 7878437301795101751}
   - component: {fileID: 3473081072346293912}
   - component: {fileID: 1326496241182400508}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: polySurface91
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -342,7 +342,7 @@ GameObject:
   - component: {fileID: 6978375568653832878}
   - component: {fileID: 6838844072099115118}
   - component: {fileID: 8592575424031170995}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: polySurface71
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -419,7 +419,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3761259540132752399}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: group3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -456,9 +456,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7923731801871955506}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: block ludum 2
-  m_TagString: Untagged
+  m_TagString: Environment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -490,7 +490,7 @@ GameObject:
   - component: {fileID: 3867695102848963992}
   - component: {fileID: 7229275287851752839}
   - component: {fileID: 2414399564840176205}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: polySurface70
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -569,7 +569,7 @@ GameObject:
   - component: {fileID: 4954235429754213229}
   - component: {fileID: 6046444270499655630}
   - component: {fileID: 8954159990317500401}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: polySurface72
   m_TagString: Untagged
   m_Icon: {fileID: 0}
