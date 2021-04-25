@@ -4,6 +4,8 @@ using UnityEngine;
 public class AudioManager : MonoBehaviour
 {
     public Sound[] sounds;
+
+    public static AudioManager instance;
     void Awake()
     {
         foreach (Sound s in sounds)
@@ -15,19 +17,42 @@ public class AudioManager : MonoBehaviour
             s.source.pitch = s.picth;
             s.source.loop = s.loop;
         }
+        if (instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        instance = this;
+        DontDestroyOnLoad(gameObject);
     }
     public void Play(string name)
     {
        Sound s= Array.Find(sounds, sound => sound.name == name);
 
-        if (s != null)
+        if (s != null && !s.source.isPlaying)
             s.source.Play();
     }
     public void Stop(string name)
     {
         Sound s = Array.Find(sounds, sound => sound.name == name);
 
-        if (s != null)
+        if (s != null && s.source.isPlaying)
             s.source.Stop();
+    }
+    public void SetVolumeSFX()
+    {
+        foreach (Sound s in sounds)
+        {
+            if(s.type == Sound.Type.sound)
+                s.source.volume = DataManager.instance.GetSFXVolume();
+        }
+    }
+    public void SetVolumeMusic()
+    {
+        foreach (Sound s in sounds)
+        {
+            if(s.type == Sound.Type.music)
+                s.source.volume = DataManager.instance.GetMusicVolume();
+        }
     }
 }

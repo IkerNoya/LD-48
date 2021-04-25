@@ -536,7 +536,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Faka
+          m_StringArgument: Faka 2
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1108190634
@@ -1409,6 +1409,36 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: AudioManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 2594811532211877473, guid: 186a3c159efb4f74690151ea787e2530,
+        type: 3}
+      propertyPath: sounds.Array.data[0].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 569e8a953f5104d439e061d049c00883, type: 3}
+    - target: {fileID: 2594811532211877473, guid: 186a3c159efb4f74690151ea787e2530,
+        type: 3}
+      propertyPath: sounds.Array.data[0].name
+      value: MUSIC1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2594811532211877473, guid: 186a3c159efb4f74690151ea787e2530,
+        type: 3}
+      propertyPath: sounds.Array.data[1].name
+      value: SONIDO1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2594811532211877473, guid: 186a3c159efb4f74690151ea787e2530,
+        type: 3}
+      propertyPath: sounds.Array.data[0].type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2594811532211877473, guid: 186a3c159efb4f74690151ea787e2530,
+        type: 3}
+      propertyPath: sounds.Array.data[0].picth
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2594811532211877473, guid: 186a3c159efb4f74690151ea787e2530,
+        type: 3}
+      propertyPath: sounds.Array.data[0].volume
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2594811532211877478, guid: 186a3c159efb4f74690151ea787e2530,
         type: 3}

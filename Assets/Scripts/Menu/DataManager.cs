@@ -26,10 +26,12 @@ public class DataManager : MonoBehaviour
     public void SetSFXVolume(float value)
     {
         sfxVolume = value;
+        AudioManager.instance.SetVolumeSFX();
     }
     public void SetMusicVolume(float value)
     {
         musicVolume = value;
+        AudioManager.instance.SetVolumeMusic();
     }
     public float GetMusicVolume()
     {

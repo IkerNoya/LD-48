@@ -17,5 +17,12 @@ public class Sound
 
     public string name;
 
+    public enum Type
+    {
+        sound,
+        music
+    }
+    public Type type;
+
     public bool loop;
 }
