@@ -18,6 +18,8 @@ public class FPSController : MonoBehaviour
     [SerializeField] float crouchingHeadVerticalAmplitude;
     [SerializeField] float standingHeadBobVerticalAmplitude;
     [Space]
+    [SerializeField] float slowMotionAmmount;
+    [Space]
     [SerializeField] Transform groundCheck;
     [SerializeField] Transform head;
     [SerializeField] Transform crouchCamPos;
@@ -36,6 +38,7 @@ public class FPSController : MonoBehaviour
     float hBobFrequency;
     float hBobVerticalAmplitude;
     float axisDifference = 0.001f;
+    float currentSlowMotionAmmount;
 
     Vector3 movement;
     Vector3 velocity;
@@ -43,6 +46,7 @@ public class FPSController : MonoBehaviour
     bool isGrounded;
     bool isSprinting;
     bool isCrouched;
+    bool isSlowMotionActivated=false;
 
     void Start()
     {
@@ -50,6 +54,7 @@ public class FPSController : MonoBehaviour
         sprintToggle = DataManager.instance.GetPlayerToggleSprint();
         controller = GetComponent<CharacterController>();
         crouchedHeadPos = camera.transform.position.y - 0.7f;
+        currentSlowMotionAmmount = slowMotionAmmount;
     }
 
     void Update()
@@ -129,6 +134,12 @@ public class FPSController : MonoBehaviour
         //jump
         if (Input.GetButtonDown("Jump") && isGrounded)
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity); // jump formula: result = sqrt( h * -2 * g)
+
+        //slow motion
+        if(Input.GetKeyDown(KeyCode.F) && currentSlowMotionAmmount > slowMotionAmmount - ((slowMotionAmmount * 100) / 20))
+        {
+
+        }
     }
     void Movement()
     {
