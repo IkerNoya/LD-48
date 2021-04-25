@@ -11,8 +11,11 @@ public class Bailif : Weapon
 
     void Update()
     {
-        fire.pitch = Time.timeScale;
-        fire.volume = DataManager.instance.GetSFXVolume();
+        if (fire != null)
+        {
+            fire.pitch = Time.timeScale;
+            fire.volume = DataManager.instance.GetSFXVolume();
+        }
         if (Input.GetKey(KeyCode.Mouse0) && canShoot && shootTimer <= 0 && currentAmmo > 0)
         {
             Shoot(ref currentAmmo);
