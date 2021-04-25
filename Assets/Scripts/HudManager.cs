@@ -6,15 +6,18 @@ using UnityEngine.UI;
 public class HudManager : MonoBehaviour
 {
     //generalize to weapons later
-    [SerializeField] Pistol weapon;
+    [SerializeField] Weapon weapon;
     [SerializeField] Text ammo;
+    [SerializeField] Image slowMotionBar;
+    FPSController player;
     void Start()
     {
-        
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<FPSController>();
     }
 
     void Update()
     {
-        ammo.text = weapon.GetCurrentAmmo().ToString() + " / " + weapon.GetMaxAmmo().ToString();
+        if(slowMotionBar!=null) slowMotionBar.fillAmount = player.GetSlowMotionAmmount() / 100;
+        if(ammo!=null) ammo.text = weapon.GetCurrentAmmo().ToString() + " / " + weapon.GetMaxAmmo().ToString();
     }
 }

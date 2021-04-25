@@ -8,6 +8,7 @@ public class FPSController : MonoBehaviour
     [SerializeField] float sprintSpeed;
     [SerializeField] float crouchMovementSpeed;
     [SerializeField] float crouchSpeed;
+    [SerializeField] float lavaDamageValue;
     [Space]
     [SerializeField] float groundDistance;
     [SerializeField] float jumpHeight;
@@ -17,6 +18,9 @@ public class FPSController : MonoBehaviour
     [SerializeField] float sprintingHeadBobFrequency;
     [SerializeField] float crouchingHeadVerticalAmplitude;
     [SerializeField] float standingHeadBobVerticalAmplitude;
+    [Space]
+    [SerializeField] float slowMotionAmmount;
+    [SerializeField] float slowMotionRecovery;
     [Space]
     [SerializeField] Transform groundCheck;
     [SerializeField] Transform head;
@@ -28,6 +32,8 @@ public class FPSController : MonoBehaviour
     public bool sprintToggle;
 
     CharacterController controller;
+    TimeManager timeManager;
+    HealthSystem health;
 
     float gravity = -9.81f * 2;
     float yNegativeVelocity = -2;
@@ -36,6 +42,9 @@ public class FPSController : MonoBehaviour
     float hBobFrequency;
     float hBobVerticalAmplitude;
     float axisDifference = 0.001f;
+    float currentSlowMotionAmmount;
+    float lavaTimer;
+    float maxLavaTimer = 1f;
 
     Vector3 movement;
     Vector3 velocity;
@@ -43,6 +52,8 @@ public class FPSController : MonoBehaviour
     bool isGrounded;
     bool isSprinting;
     bool isCrouched;
+    bool isSlowMotionActivated=false;
+    bool isInLava = false;
 
     void Start()
     {
@@ -50,6 +61,9 @@ public class FPSController : MonoBehaviour
         sprintToggle = DataManager.instance.GetPlayerToggleSprint();
         controller = GetComponent<CharacterController>();
         crouchedHeadPos = camera.transform.position.y - 0.7f;
+        currentSlowMotionAmmount = slowMotionAmmount;
+        timeManager = TimeManager.Instance;
+        health = GetComponent<HealthSystem>();
     }
 
     void Update()
@@ -68,11 +82,34 @@ public class FPSController : MonoBehaviour
             timeWalking += Time.deltaTime;
         else
             timeWalking = 0;
-
         
         //jump + artificial gravity
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
+
+        //slow motion
+        if (isSlowMotionActivated) timeManager.SlowMotion(ref currentSlowMotionAmmount, isSlowMotionActivated);
+        else
+        {
+            timeManager.SlowMotion(ref currentSlowMotionAmmount, isSlowMotionActivated);
+            if (currentSlowMotionAmmount < slowMotionAmmount) 
+                currentSlowMotionAmmount += Time.deltaTime * slowMotionRecovery;
+        }
+        if (currentSlowMotionAmmount <= 0) isSlowMotionActivated = false;
+
+        //health + Lava
+        if(isInLava)
+        {
+            if(lavaTimer <= 0)
+            {
+                health.SubstractLife(lavaDamageValue);
+                TakeDamage();
+                lavaTimer = maxLavaTimer;
+            }
+            lavaTimer -= Time.deltaTime;
+        }
+        Debug.Log(lavaTimer);
+        //Functions
         Inputs();
         Movement();
         Crouch();
@@ -129,15 +166,42 @@ public class FPSController : MonoBehaviour
         //jump
         if (Input.GetButtonDown("Jump") && isGrounded)
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity); // jump formula: result = sqrt( h * -2 * g)
+
+        //slow motion
+        if(Input.GetKeyDown(KeyCode.F) && currentSlowMotionAmmount > slowMotionAmmount/4 && !isSlowMotionActivated)
+        {
+            isSlowMotionActivated = true;
+        }
+        else if(Input.GetKeyDown(KeyCode.F) && isSlowMotionActivated)
+        {
+            isSlowMotionActivated = false;
+        }
     }
     void Movement()
     {
         if (isSprinting)
-            controller.Move(movement * sprintSpeed * Time.deltaTime);
+        {
+            if (!isInLava)
+                controller.Move(movement * sprintSpeed * Time.deltaTime);
+            else
+                controller.Move(movement * (sprintSpeed / 2) * Time.deltaTime);
+        }
         if (isCrouched)
-            controller.Move(movement * crouchMovementSpeed * Time.deltaTime);
+        {
+            if(!isInLava)
+                controller.Move(movement * crouchMovementSpeed * Time.deltaTime);
+            else
+                controller.Move(movement * (crouchMovementSpeed / 2) * Time.deltaTime);
+                
+        }
         if (!isSprinting && !isCrouched)
-            controller.Move(movement * speed * Time.deltaTime);
+        {
+            if(!isInLava)
+                controller.Move(movement * speed * Time.deltaTime);
+            else
+                controller.Move(movement * (speed / 2) * Time.deltaTime);
+
+        }
     }
     //reparar
     void Crouch()
@@ -197,5 +261,32 @@ public class FPSController : MonoBehaviour
                 offset = crouchCamPos.transform.up * movement;
         }
         return offset;
+    }
+    void TakeDamage()
+    {
+        //Special Effects
+    }
+    public float GetSlowMotionAmmount()
+    {
+        return currentSlowMotionAmmount;
+    }
+    public bool GetIsInLava()
+    {
+        return isInLava;
+    }
+    
+
+    void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        if (hit.collider.CompareTag("Lava"))
+        {
+            if (!isInLava)
+                isInLava = true;
+        }
+        if (hit.collider.CompareTag("Ground"))
+        {
+            if (isInLava)
+                isInLava = false;
+        }
     }
 }

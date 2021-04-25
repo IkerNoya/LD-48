@@ -20,6 +20,10 @@ public class SceneLoader : MonoBehaviour
         instance = this;
         DontDestroyOnLoad(gameObject);
     }
+    public void Start()
+    {
+        AudioManager.instance.Play("MUSIC1");
+    }
     public void LoadScene(string name)
     {
         SceneManager.LoadScene(name, LoadSceneMode.Single);
