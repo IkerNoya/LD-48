@@ -96,7 +96,7 @@ Material:
     - _Color: {r: 0.71323526, g: 0.71323526, b: 0.71323526, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
---- !u!114 &7457129462990316158
+--- !u!114 &2071481740358906620
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}

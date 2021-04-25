@@ -9,7 +9,7 @@ public class HealthSystem : MonoBehaviour
     [SerializeField] protected float maxLife;
     [SerializeField] protected UnityEvent OnDie;
 
-    public void SubstractLife(float damage) { life = life - damage; }
+    public void SubstractLife(float damage) { life -= damage; }
 
     public bool CheckDie()
     {
@@ -33,7 +33,6 @@ public class HealthSystem : MonoBehaviour
     {
         life = maxLife;
     }
-
 
     public float GetLife() { return life; }
 }
