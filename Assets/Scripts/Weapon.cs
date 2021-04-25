@@ -16,6 +16,9 @@ public class Weapon : MonoBehaviour
     [Space]
     [SerializeField] protected float range;
     [Space]
+    [SerializeField] protected float spreadX = 0.25f;
+    [SerializeField] protected float spreadY = 0.03f;
+    [Space]
     [SerializeField] protected ParticleSystem muzzleFlash;
     [SerializeField] protected ParticleSystem hitEnvironment;
     [SerializeField] protected ParticleSystem hitEnemy;
@@ -24,9 +27,6 @@ public class Weapon : MonoBehaviour
     [Space]
     [SerializeField] protected AudioSource fire;
     [SerializeField] protected AudioSource reload;
-    [Space]
-    [SerializeField] protected float spreadX = 0.25f;
-    [SerializeField] protected float spreadY = 0.03f;
  
 
 
