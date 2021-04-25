@@ -7,20 +7,38 @@ public class TimeManager : MonoBehaviour
     [SerializeField] float decreaseSpeed;
     [SerializeField] AnimationCurve slowMotionValue;
 
-    TimeManager instance;
-    public TimeManager Instance { get { return instance; } }
+    float slowMotion=0;
+
+    public static TimeManager instance;
+    public static TimeManager Instance { get { return instance; } }
+    float time = 0;
     
 
     void Awake()
     {
         if (instance == null)
             instance = this;
+        else
+            Destroy(gameObject);
     }
 
-    void SlowMotion(ref float slowMotionAmmount)
+    public void SlowMotion(ref float slowMotionAmmount, bool isActivated)
     {
-        slowMotionAmmount -= Time.deltaTime * decreaseSpeed;
-        Time.timeScale = slowMotionValue.Evaluate(Time.deltaTime);
+        
+        if (isActivated)
+        {
+            if(time<1)
+                time += Time.timeScale /40;
+            slowMotion = slowMotionValue.Evaluate(time);
+            slowMotionAmmount -= Time.deltaTime * decreaseSpeed;
+        }
+        else
+        {
+            if(time>0)
+                time -= Time.timeScale /60;
+            slowMotion = slowMotionValue.Evaluate(time);
+        }
+        Time.timeScale = slowMotion;
     }
 
 }
