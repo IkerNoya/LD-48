@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4203011628683861160}
   m_Layer: 0
   m_Name: pSphere2
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -92,7 +92,7 @@ GameObject:
   - component: {fileID: 4887535600321195638}
   m_Layer: 0
   m_Name: pSphere4
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -171,7 +171,7 @@ GameObject:
   - component: {fileID: 2904219882191429470}
   m_Layer: 0
   m_Name: pCube2
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -250,7 +250,7 @@ GameObject:
   - component: {fileID: 4398735808032932491}
   m_Layer: 0
   m_Name: pSphere5
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -359,7 +359,7 @@ GameObject:
   - component: {fileID: 5247886476412384120}
   m_Layer: 0
   m_Name: pCylinder1
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -438,7 +438,7 @@ GameObject:
   - component: {fileID: 266405572328321409}
   m_Layer: 0
   m_Name: pCylinder2
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -515,7 +515,7 @@ GameObject:
   - component: {fileID: 9088503028479982486}
   m_Layer: 0
   m_Name: monstruo low
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -717,7 +717,7 @@ GameObject:
   - component: {fileID: 1539788536286346250}
   m_Layer: 0
   m_Name: pSphere3
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

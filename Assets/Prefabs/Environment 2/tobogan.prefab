@@ -149,7 +149,7 @@ GameObject:
   - component: {fileID: 3588909959876752625}
   m_Layer: 10
   m_Name: tobogan
-  m_TagString: Untagged
+  m_TagString: Environment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -27,8 +27,6 @@ public class Weapon : MonoBehaviour
     [Space]
     [SerializeField] protected AudioSource fire;
     [SerializeField] protected AudioSource reload;
- 
-
 
     int pellets = 8;
 

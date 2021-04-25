@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2031777378872720199}
   - component: {fileID: 2286634743659198975}
   - component: {fileID: 1534425650497176208}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: roca
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -89,9 +89,9 @@ GameObject:
   m_Component:
   - component: {fileID: 8687255758700159748}
   - component: {fileID: 5871531962650711026}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Roca redonda 1
-  m_TagString: Untagged
+  m_TagString: Environment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
