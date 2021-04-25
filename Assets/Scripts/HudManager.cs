@@ -18,7 +18,6 @@ public class HudManager : MonoBehaviour
     void Update()
     {
         slowMotionBar.fillAmount = player.GetSlowMotionAmmount() / 100;
-        Debug.Log(player.GetSlowMotionAmmount());
         ammo.text = weapon.GetCurrentAmmo().ToString() + " / " + weapon.GetMaxAmmo().ToString();
     }
 }

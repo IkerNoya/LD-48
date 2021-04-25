@@ -45,6 +45,7 @@ public class Weapon : MonoBehaviour
 
     public static event Action<Weapon, Transform> HitDamage;
 
+
     protected void Shoot(ref int currentAmmo)
     {
         RaycastHit hit;
