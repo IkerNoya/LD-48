@@ -43,6 +43,8 @@ public class Perseguidor : Enemy
 
     public static event Action<float, Transform> OnDamagePerseguidor;
 
+    Animator anim;
+
     void OnEnable()
     {
         Weapon.HitDamage += OnHitMe;
@@ -75,6 +77,7 @@ public class Perseguidor : Enemy
     protected override void Start()
     {
         base.Start();
+        anim = GetComponent<Animator>();
         auxDelayAttack = delayAttack;
     }
 
@@ -102,6 +105,7 @@ public class Perseguidor : Enemy
     
     private void Idle()
     {
+        anim.SetBool("isRunning", false);
         if (startBehaviour)
         {
             fsmEnemy.SendEvent((int)Perseguidor_EVENTS.StartBehaviour);
@@ -121,6 +125,7 @@ public class Perseguidor : Enemy
 
     private void RunToTarget()
     {
+        anim.SetBool("isRunning", true);
         navMeshAgent.speed = speedRunToTarget;
         navMeshAgent.acceleration = speedRunToTarget * 2;
         navMeshAgent.isStopped = false;
@@ -145,8 +150,7 @@ public class Perseguidor : Enemy
         rig.velocity = Vector3.zero;
         rig.angularVelocity = Vector3.zero;
 
-        if(loockAtTargetInAttack)
-            transform.LookAt(new Vector3(CurrentTarget.position.x, transform.position.y , CurrentTarget.position.z));
+        transform.LookAt(new Vector3(CurrentTarget.position.x, transform.position.y , CurrentTarget.position.z));
 
         if (delayAttack > 0)
         {
@@ -154,20 +158,8 @@ public class Perseguidor : Enemy
         }
         else
         {
-            delayAttack = auxDelayAttack;
-
-            Vector3 scale = new Vector3(rangeToAttack + 1, 0, rangeToAttack + 1);
-
-            Collider[] collidersOverlap = Physics.OverlapBox(transform.position, transform.localScale + scale, Quaternion.identity, layerPlayer);
-
-            for (int i = 0; i < collidersOverlap.Length; i++)
-            {
-                if (collidersOverlap[i] != null)
-                {
-                    if(OnDamagePerseguidor != null)
-                        OnDamagePerseguidor(damagePerseguidor, collidersOverlap[i].transform);
-                }
-            }
+            anim.SetTrigger("Attack");
+            
         }
         float distance = Vector3.Distance(transform.position, CurrentTarget.position);
         if (distance > rangeToAttack)
@@ -179,6 +171,9 @@ public class Perseguidor : Enemy
 
     private void Die()
     {
+        anim.SetTrigger("Die");
+        rig.velocity = Vector3.zero;
+        transform.position = transform.position;
         healthSystem.CheckDieEvent();
     }
 
@@ -189,7 +184,24 @@ public class Perseguidor : Enemy
             healthSystem.SubstractLife(weaponHitMe.GetDamage());
         }
     }
+    //evento de animacion para linkear animacion con funcionalidad
+    public void Attack()
+    {
+        delayAttack = auxDelayAttack;
 
+        Vector3 scale = new Vector3(rangeToAttack + 1, 0, rangeToAttack + 1);
+
+        Collider[] collidersOverlap = Physics.OverlapBox(transform.position, transform.localScale + scale, Quaternion.identity, layerPlayer);
+
+        for (int i = 0; i < collidersOverlap.Length; i++)
+        {
+            if (collidersOverlap[i] != null)
+            {
+                if (OnDamagePerseguidor != null)
+                    OnDamagePerseguidor(damagePerseguidor, collidersOverlap[i].transform);
+            }
+        }
+    }
     public void SetCurrentBehaviourPerseguidor(CurrentBehaviourPerseguidor value) => currentBehaviourPerseguidor = value;
 
 }
