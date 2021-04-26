@@ -5112,8 +5112,8 @@ GameObject:
   - component: {fileID: 8512898869019962023}
   - component: {fileID: 8512898869019962020}
   - component: {fileID: 3247664983541504530}
-  - component: {fileID: 1204547725984498559}
   - component: {fileID: 103666036}
+  - component: {fileID: 2374235929078826929}
   m_Layer: 9
   m_Name: PlayerController (Original)
   m_TagString: Player
@@ -5247,7 +5247,7 @@ MonoBehaviour:
           m_StringArgument: GameOver
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &1204547725984498559
+--- !u!114 &103666036
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5260,7 +5260,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthSystem: {fileID: 3247664983541504530}
---- !u!114 &103666036
+--- !u!114 &2374235929078826929
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5269,7 +5269,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8512898869019962016}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cfebfa39c483c73439a4a42f8124bca5, type: 3}
+  m_Script: {fileID: 11500000, guid: 59fd25d0e6f755442873f9d0f6f432e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   healthSystem: {fileID: 3247664983541504530}

@@ -4,6 +4,7 @@ using System;
 
 public class Enemy : MonoBehaviour
 {
+    public static event Action<Enemy> OnDieEnemy;
     protected FSM fsmEnemy;
     [SerializeField] protected bool startBehaviour = false;
 
@@ -28,6 +29,9 @@ public class Enemy : MonoBehaviour
     {
         if (healthSystem.CheckDie())
         {
+            if (OnDieEnemy != null)
+                OnDieEnemy(this);
+
             fsmEnemy.SendEvent(sendEventLifeOut);
         }
     }

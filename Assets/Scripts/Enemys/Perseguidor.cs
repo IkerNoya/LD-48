@@ -83,19 +83,19 @@ public class Perseguidor : Enemy
         switch (fsmEnemy.GetCurrentState())
         {
             case (int)Perseguidor_STATES.Idle:
-                Idle();
+                Idle(); //IDLE
                 break;
             case (int)Perseguidor_STATES.InitPerseguidor:
-                InitPerseguidor();
+                InitPerseguidor(); //ASIGNA COMPORTAMIENTO (PONELE ANIMACION IDLE)
                 break;
             case (int)Perseguidor_STATES.RunToTarget:
-                RunToTarget();
+                RunToTarget(); // CORRE HACIA EL JUGADOR
                 break;
             case (int)Perseguidor_STATES.AttackTarget:
-                AttackTarget();
+                AttackTarget(); //EJECUTA LA ANIMACION DE IDLE
                 break;
             case (int)Perseguidor_STATES.Die:
-                Die();
+                Die(); // C MUERE EL ENEMIGO
                 break;
         }
     }
