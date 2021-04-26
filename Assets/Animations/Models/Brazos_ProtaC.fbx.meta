@@ -5,7 +5,7 @@ ModelImporter:
   internalIDToNameTable:
   - first:
       74: 1827226128182048838
-    second: Idle
+    second: Spawn
   - first:
       74: -998496362607748373
     second: Walk
@@ -32,10 +32,13 @@ ModelImporter:
     second: Dash(Begining)
   - first:
       74: 3280542803925046194
-    second: Dash(Loop)
+    second: Dash(Disparo)
   - first:
       74: 3364614535709492094
     second: Dash(End)
+  - first:
+      74: -3100369314251171874
+    second: Idle
   externalObjects: {}
   materials:
     materialImportMode: 1
@@ -65,11 +68,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Idle
+      name: Spawn
       takeName: Take 001
       internalID: 0
-      firstFrame: 0
-      lastFrame: 276
+      firstFrame: 1
+      lastFrame: 20
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -97,15 +100,15 @@ ModelImporter:
       name: Walk
       takeName: Take 001
       internalID: 0
-      firstFrame: 0
-      lastFrame: 276
+      firstFrame: 21
+      lastFrame: 45
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
+      loopTime: 1
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
@@ -126,8 +129,8 @@ ModelImporter:
       name: Attack
       takeName: Take 001
       internalID: 0
-      firstFrame: 0
-      lastFrame: 276
+      firstFrame: 50
+      lastFrame: 83
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -155,8 +158,8 @@ ModelImporter:
       name: Reload(Begining)
       takeName: Take 001
       internalID: 0
-      firstFrame: 0
-      lastFrame: 276
+      firstFrame: 90
+      lastFrame: 110
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -184,8 +187,8 @@ ModelImporter:
       name: Reload(End)
       takeName: Take 001
       internalID: 0
-      firstFrame: 0
-      lastFrame: 276
+      firstFrame: 120
+      lastFrame: 166
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -213,8 +216,8 @@ ModelImporter:
       name: Run(Begining)
       takeName: Take 001
       internalID: 0
-      firstFrame: 0
-      lastFrame: 276
+      firstFrame: 170
+      lastFrame: 177
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -271,8 +274,8 @@ ModelImporter:
       name: Run(End)
       takeName: Take 001
       internalID: 0
-      firstFrame: 0
-      lastFrame: 276
+      firstFrame: 202
+      lastFrame: 215
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -300,8 +303,8 @@ ModelImporter:
       name: Dash(Begining)
       takeName: Take 001
       internalID: 0
-      firstFrame: 0
-      lastFrame: 276
+      firstFrame: 220
+      lastFrame: 229
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -326,11 +329,11 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Dash(Loop)
+      name: Dash(Disparo)
       takeName: Take 001
       internalID: 0
-      firstFrame: 0
-      lastFrame: 276
+      firstFrame: 229
+      lastFrame: 265
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -358,8 +361,37 @@ ModelImporter:
       name: Dash(End)
       takeName: Take 001
       internalID: 0
-      firstFrame: 0
-      lastFrame: 276
+      firstFrame: 265
+      lastFrame: 275
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Idle
+      takeName: Take 001
+      internalID: 0
+      firstFrame: 20
+      lastFrame: 21
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -442,7 +474,7 @@ ModelImporter:
   autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 2
   humanoidOversampling: 1
-  avatarSetup: 0
+  avatarSetup: 1
   additionalBone: 0
   userData: 
   assetBundleName: 
