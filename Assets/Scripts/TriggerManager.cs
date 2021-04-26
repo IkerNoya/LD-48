@@ -5,8 +5,13 @@ using UnityEngine.Events;
 public class TriggerManager : MonoBehaviour
 {
     [SerializeField] public UnityEvent OnTriggerEvent;
+
+    [SerializeField] private string compareTag;
     private void OnTriggerEnter(Collider other)
     {
-        OnTriggerEvent?.Invoke();
+        if (other.CompareTag(compareTag))
+        {
+            OnTriggerEvent?.Invoke();
+        }
     }
 }

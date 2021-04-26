@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class SpawnerEnemy : MonoBehaviour
 {
+    [SerializeField] private bool useSingeltone;
     [SerializeField] private List<Spawn> spawnPositions;
     [SerializeField] private bool inmediatedGeneratedInStart = true;
     [Range(1, 100)]
@@ -21,12 +22,15 @@ public class SpawnerEnemy : MonoBehaviour
     private static SpawnerEnemy instance;
     void Awake()
     {
-        if (instance != null)
+        if (useSingeltone)
         {
-            Destroy(gameObject);
-            return;
+            if (instance != null)
+            {
+                Destroy(gameObject);
+                return;
+            }
+            instance = this;
         }
-        instance = this;
     }
 
     void OnEnable()
@@ -41,7 +45,8 @@ public class SpawnerEnemy : MonoBehaviour
 
     void Start()
     {
-        levelManager = LevelManager.instance;
+        if(levelManager == null)
+            levelManager = LevelManager.instance;
 
         auxDelaySpawnEnemy = delaySpawnEnemy;
 
@@ -56,6 +61,7 @@ public class SpawnerEnemy : MonoBehaviour
         totalEnemysGenerated = levelManager.countEnemysDieForPassLevel;
         countEnemysGenerated = (int)GetCountEnemysGenerated();
         levelManager.needEnemysDieForNextGenerationsEnemys = countEnemysGenerated;
+        Debug.Log(countEnemysGenerated);
     }
 
     private float GetCountEnemysGenerated()
@@ -70,27 +76,31 @@ public class SpawnerEnemy : MonoBehaviour
 
     public void CheckSpawn()
     {
-        if (countEnemysGenerated > 0)
+        if (!levelManager.GetEnablePassLevel())
         {
-            if (delaySpawnEnemy > 0)
+            if (countEnemysGenerated > 0)
             {
-                delaySpawnEnemy = delaySpawnEnemy - Time.deltaTime;
+                if (delaySpawnEnemy > 0)
+                {
+                    delaySpawnEnemy = delaySpawnEnemy - Time.deltaTime;
+                }
+                else
+                {
+                    delaySpawnEnemy = auxDelaySpawnEnemy;
+                    ChooseSpawn();
+                    countEnemysGenerated--;
+                }
             }
             else
             {
-                delaySpawnEnemy = auxDelaySpawnEnemy;
-                ChooseSpawn();
-                countEnemysGenerated--;
+                levelManager.enableGeneratedEnemys = false;
             }
-        }
-        else
-        {
-            levelManager.enableGeneratedEnemys = false;
         }
     }
 
     private void OnEnableGeneratedEnemy(LevelManager lm)
     {
+        //Debug.Log("SI APAREZCO");
         AssignedCountEnemysGenerated();
     }
 

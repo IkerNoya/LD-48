@@ -4,6 +4,7 @@ using UnityEngine;
 using System;
 public class LevelManager : MonoBehaviour
 {
+    [SerializeField] private bool useSingeltone;
     public static event Action<LevelManager> OnEnableGeneratedEnemys;
 
     public static LevelManager instance;
@@ -16,7 +17,7 @@ public class LevelManager : MonoBehaviour
 
     [HideInInspector] public int needEnemysDieForNextGenerationsEnemys;
 
-    private int currentEnemysDie;
+    private int currentEnemysDie = 0;
 
     private bool enablePassLevel;
 
@@ -32,12 +33,15 @@ public class LevelManager : MonoBehaviour
 
     void Awake()
     {
-        if (instance != null)
+        if (useSingeltone)
         {
-            Destroy(gameObject);
-            return;
+            if (instance != null)
+            {
+                Destroy(gameObject);
+                return;
+            }
+            instance = this;
         }
-        instance = this;
     }
     void Start()
     {
@@ -48,20 +52,23 @@ public class LevelManager : MonoBehaviour
     private void OnEnemyDie(Enemy e)
     {
         currentEnemysDie++;
-        countEnemysDieForPassLevel--;
+
         if (needEnemysDieForNextGenerationsEnemys > 0)
             needEnemysDieForNextGenerationsEnemys--;
-        else
+
+        if(needEnemysDieForNextGenerationsEnemys <= 0)
         {
+            //Debug.Log("ME MORI OwO");
             enableGeneratedEnemys = true;
-            if (currentEnemysDie < auxCountEnemysDieForPassLevel)
+            if (currentEnemysDie <= auxCountEnemysDieForPassLevel)
             {
+                //Debug.Log("ME MORI UWU");
+                 if(currentEnemysDie == auxCountEnemysDieForPassLevel)
+                 {
+                    enablePassLevel = true;
+                 }
                 if (OnEnableGeneratedEnemys != null)
                     OnEnableGeneratedEnemys(this);
-            }
-            else
-            {
-                enablePassLevel = true;
             }
         }
     }
