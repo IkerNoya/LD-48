@@ -14,7 +14,7 @@ public class AudioManager : MonoBehaviour
             s.source.clip = s.clip;
 
             s.source.volume = DataManager.instance.GetSFXVolume();
-            s.source.pitch = s.picth;
+            s.source.pitch = Time.timeScale;
             s.source.loop = s.loop;
         }
         if (instance != null)
@@ -53,6 +53,14 @@ public class AudioManager : MonoBehaviour
         {
             if(s.type == Sound.Type.music)
                 s.source.volume = DataManager.instance.GetMusicVolume();
+        }
+    }
+    void Update()
+    {
+        foreach (Sound s in sounds)
+        {
+            if(s.source.isPlaying)
+                s.source.pitch = Time.timeScale;
         }
     }
 }
