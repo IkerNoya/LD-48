@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2611525640665027868}
   - component: {fileID: 1410149151435840185}
   - component: {fileID: 3779976285182635635}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: tobogan salida
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92,7 +92,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1460279664885008203}
   - component: {fileID: 1177862921482918537}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -136,7 +136,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8904716744069408906}
   - component: {fileID: 7487826698905037927}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: GameObject (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -180,7 +180,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5550262428715406034}
   - component: {fileID: 478538076096953330}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: GameObject (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

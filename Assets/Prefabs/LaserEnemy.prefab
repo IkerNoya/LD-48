@@ -374,6 +374,8 @@ MonoBehaviour:
   tagGeneratorPosition: GeneratorBasedMyPosition
   positionGeneratorsBasedMyPositions: []
   addHeightInTeleport: 2.195
+  deathtEffetc: {fileID: 198000010585806678, guid: 96730f8640590934eacb6f860058e7f9,
+    type: 3}
 --- !u!114 &550884993554216100
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -410,7 +412,7 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
-          m_FloatArgument: 5
+          m_FloatArgument: 3
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
