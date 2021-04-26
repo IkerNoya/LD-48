@@ -385,7 +385,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 877743577}
+      - m_Target: {fileID: 6394643236910767895, guid: ea6dbf246b3d62941bd0c8ca61836bbb,
+          type: 3}
         m_MethodName: LoadScene
         m_Mode: 5
         m_Arguments:
@@ -433,18 +434,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 472397544}
   m_CullTransparentMesh: 0
---- !u!114 &877743577 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6394643236910767895, guid: ea6dbf246b3d62941bd0c8ca61836bbb,
-    type: 3}
-  m_PrefabInstance: {fileID: 6394643236640554867}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4c5dd0f3791faca4fa4b406332d376fc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1108190631
 GameObject:
   m_ObjectHideFlags: 0
@@ -1334,12 +1323,12 @@ PrefabInstance:
     - target: {fileID: 1496269290932237794, guid: de08a28b23e0c4f49af60d0eb84cd534,
         type: 3}
       propertyPath: musicVolume
-      value: 0.5
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 1496269290932237794, guid: de08a28b23e0c4f49af60d0eb84cd534,
         type: 3}
       propertyPath: sfxVolume
-      value: 0.5
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 1496269290932237795, guid: de08a28b23e0c4f49af60d0eb84cd534,
         type: 3}
