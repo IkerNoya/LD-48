@@ -14,6 +14,8 @@ public class FPSController : MonoBehaviour
     [Space]
     [SerializeField] float lavaDamageValue;
     [Space]
+    [SerializeField] Animator anim;
+    [Space]
     [SerializeField] float groundDistance;
     [SerializeField] float jumpHeight;
     [Space]
@@ -84,8 +86,12 @@ public class FPSController : MonoBehaviour
         //movement + sprint
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
-        if(!OnSlope())
+        float animAxis = Mathf.Abs(Input.GetAxis("Horizontal")) + Mathf.Abs(Input.GetAxis("Vertical"));
+        if (!OnSlope())
+        {
             movement = transform.right * x + transform.forward * z;
+            anim.SetFloat("Axis", animAxis);
+        }
         if(Input.GetButton("Horizontal") || Input.GetButton("Vertical"))
             timeWalking += Time.deltaTime;
         else

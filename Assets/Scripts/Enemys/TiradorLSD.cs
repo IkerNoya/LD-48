@@ -46,6 +46,8 @@ public class TiradorLSD : Enemy
     [SerializeField] private List<PositionGeneratorBasedMyPosition> positionGeneratorsBasedMyPositions;
     [SerializeField] private float addHeightInTeleport;
 
+    [SerializeField] private ParticleSystem deathtEffetc;
+    private bool alreadyCreatedParticle = false;
     private float auxDelayShoot;
     Animator anim;
 
@@ -61,6 +63,8 @@ public class TiradorLSD : Enemy
 
     void Awake()
     {
+        alreadyCreatedParticle = false;
+
         fsmEnemy = new FSM((int)TiradorLSD_STATES.Count, (int)TiradorLSD_EVENTS.Count, (int)TiradorLSD_STATES.Idle);
 
         fsmEnemy.SetRelations((int)TiradorLSD_STATES.Idle, (int)TiradorLSD_STATES.SelectorAction, (int)TiradorLSD_EVENTS.StartBehaviour);
@@ -190,6 +194,11 @@ public class TiradorLSD : Enemy
     private void Die()
     {
         anim.SetTrigger("Die");
+        if(!alreadyCreatedParticle)
+        {
+            Instantiate(deathtEffetc, gameObject.transform.position, Quaternion.identity, gameObject.transform);
+            alreadyCreatedParticle = true;
+        }
         healthSystem.CheckDieEvent();
     }
 
