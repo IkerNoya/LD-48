@@ -6,31 +6,33 @@ public class Bailif : Weapon
 {
     void Start()
     {
-        currentAmmo = ammo;
+        currentAmmo = weaponData[weaponIdChoice].ammo;
     }
 
     void Update()
     {
-        if (fire != null)
+        if (audioSource != null)
         {
-            fire.pitch = Time.timeScale;
-            fire.volume = DataManager.instance.GetSFXVolume();
+            audioSource.pitch = Time.timeScale;
+            audioSource.volume = DataManager.instance.GetSFXVolume();
         }
         if (Input.GetKey(KeyCode.Mouse0) && canShoot && shootTimer <= 0 && currentAmmo > 0)
         {
+            anim.SetTrigger("Shoot");
             Shoot(ref currentAmmo);
-            mouseLook.AddRecoil(verticalRecoil, Random.Range(-horizontalRecoil, horizontalRecoil));
-            if (fire != null)
-                fire.Play();
+            mouseLook.AddRecoil(weaponData[weaponIdChoice].verticalRecoil, Random.Range(-weaponData[weaponIdChoice].horizontalRecoil, weaponData[weaponIdChoice].horizontalRecoil));
+            if (audioSource != null)
+                audioSource.Play();
         }
-        if (Input.GetKeyDown(KeyCode.R) && currentAmmo < ammo)
+        if (Input.GetKeyDown(KeyCode.R) && currentAmmo < weaponData[weaponIdChoice].ammo)
         {
-            StartCoroutine(Reload(2));
-            if (reload != null)
-                reload.Play();
+            StartCoroutine(Reload(weaponData[weaponIdChoice].reloadSpeed));
+            if (audioSource != null)
+                audioSource.Play();
+            
         }
         shootTimer -= Time.deltaTime;
+        ChangeWeaponMode();
     }
 
- 
 }

@@ -44,7 +44,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 100, y: 100, z: 100}
+  m_Size: {x: 112.82, y: 100, z: 110.8}
   m_Center: {x: 43.9, y: 42.9, z: -52.15}
 --- !u!54 &8653023577973472739
 Rigidbody:
@@ -75,7 +75,7 @@ GameObject:
   - component: {fileID: 1976504032071504317}
   m_Layer: 0
   m_Name: roca3
-  m_TagString: Untagged
+  m_TagString: Environment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

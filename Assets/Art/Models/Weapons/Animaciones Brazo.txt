@@ -1,0 +1,3 @@
+IDLE     1-22
+WALK     25-45
+ATTACK   50-83

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1534425650497176208}
   m_Layer: 10
   m_Name: roca
-  m_TagString: Untagged
+  m_TagString: Environment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -122,5 +122,5 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 696.1, y: 600, z: 639.08}
-  m_Center: {x: 58.3, y: 314, z: -314.1}
+  m_Size: {x: 704.5, y: 876.3, z: 646.6}
+  m_Center: {x: 73.5, y: 441.7, z: -314.1}

@@ -7,7 +7,7 @@ public class Pistol : Weapon
     
     void Start()
     {
-        currentAmmo = ammo;
+        currentAmmo = weaponData[weaponIdChoice].ammo;
     }
 
     void Update()
@@ -15,15 +15,15 @@ public class Pistol : Weapon
         if (Input.GetKey(KeyCode.Mouse0) && canShoot && shootTimer<=0 && currentAmmo>0)
         {
             Shoot(ref currentAmmo);
-            mouseLook.AddRecoil(verticalRecoil, Random.Range(-horizontalRecoil, horizontalRecoil));
-            if (fire != null)
-                fire.Play();
+            mouseLook.AddRecoil(weaponData[weaponIdChoice].verticalRecoil, Random.Range(-weaponData[weaponIdChoice].horizontalRecoil, weaponData[weaponIdChoice].horizontalRecoil));
+            if (audioSource != null)
+                audioSource.Play();
         }
-        if(Input.GetKeyDown(KeyCode.R) && currentAmmo < ammo)
+        if(Input.GetKeyDown(KeyCode.R) && currentAmmo < weaponData[weaponIdChoice].ammo)
         {
-            StartCoroutine(Reload(2));
-            if (reload != null)
-                reload.Play();
+            StartCoroutine(Reload(weaponData[weaponIdChoice].reloadSpeed));
+            if (weaponData[weaponIdChoice].reload != null)
+                audioSource.Play();
         }
         shootTimer -= Time.deltaTime;
 
