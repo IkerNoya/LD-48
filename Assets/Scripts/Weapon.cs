@@ -67,7 +67,6 @@ public class Weapon : MonoBehaviour
         {
             case AmmoType.bullet:
                 audioSource.clip = weaponData[weaponIdChoice].fire;
-                Debug.DrawRay(ray.origin, ray.direction * weaponData[weaponIdChoice].range, Color.red);
                 if (Physics.Raycast(ray, out hit, weaponData[weaponIdChoice].range))
                 {
                     //hit target

@@ -11,7 +11,6 @@ public class Bailif : Weapon
 
     void Update()
     {
-        Debug.Log(weaponIdChoice);
         if (audioSource != null)
         {
             audioSource.pitch = Time.timeScale;
