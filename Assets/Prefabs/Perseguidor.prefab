@@ -428,7 +428,7 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 1.55
-  m_BaseOffset: 0.01
+  m_BaseOffset: -0.05
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!114 &2703828737639698361
@@ -450,7 +450,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2703828737639698366}
         m_MethodName: DestroyObject
-        m_Mode: 1
+        m_Mode: 4
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

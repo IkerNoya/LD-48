@@ -6,14 +6,14 @@ public class PositionGeneratorBasedMyPosition : MonoBehaviour
 {
     // Start is called before the first frame update
 
-    [SerializeField] private float minPositionX;
-    [SerializeField] private float maxPositionX;
+    public float minPositionX;
+    public float maxPositionX;
 
-    [SerializeField] private float minPositionZ;
-    [SerializeField] private float maxPositionZ;
+    public float minPositionZ;
+    public float maxPositionZ;
 
-    [SerializeField] private float heigthGenerateRayCast;
-    [SerializeField] private float rangeRayCast = 1000;
+    public float heigthGenerateRayCast;
+    public float rangeRayCast = 1000;
 
     [SerializeField] private string nameTagEnvarioment = "Environment";
 
