@@ -14,6 +14,8 @@ public class MouseLook : MonoBehaviour
 
     void Start()
     {
+        verticalSensitivity = DataManager.instance.GetVerticalSesitivity();
+        horizontalSensitivity = DataManager.instance.GetHorizontalSesitivity();
         Cursor.lockState = CursorLockMode.Locked;
     }
 

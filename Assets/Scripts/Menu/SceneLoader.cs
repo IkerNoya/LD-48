@@ -22,10 +22,19 @@ public class SceneLoader : MonoBehaviour
     }
     public void Start()
     {
-        AudioManager.instance.Play("MUSIC1");
+        AudioManager.instance.Play("MENU");
     }
     public void LoadScene(string name)
     {
+        if (name == "MainLevel" || name == "Faka 2")
+        {
+            AudioManager.instance.Stop("MENU");
+            AudioManager.instance.Play("START");
+            AudioManager.instance.Play("GAME");
+        }
+        else
+            AudioManager.instance.Play("OPTION");
+
         SceneManager.LoadScene(name, LoadSceneMode.Single);
     }
     public Scene GetActualScene()

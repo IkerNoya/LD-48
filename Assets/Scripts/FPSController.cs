@@ -106,6 +106,7 @@ public class FPSController : MonoBehaviour
         else
         {
             timeManager.SlowMotion(ref currentSlowMotionAmmount, isSlowMotionActivated);
+
             if (currentSlowMotionAmmount < slowMotionAmmount) 
                 currentSlowMotionAmmount += Time.deltaTime * slowMotionRecovery;
         }
