@@ -10,8 +10,9 @@ public class GameManager : MonoBehaviour
         return instance;
     }
 
-    private bool isPaused;
-
+    private bool isPaused = false;
+    private float auxTimeScale;
+    
     void Awake()
     {
         if(instance != null)
@@ -19,19 +20,30 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-        instance = this;
+        instance = this;       
         DontDestroyOnLoad(gameObject);
     }
-    void Update()
+
+    private void Update()
     {
-        
+        if(Time.timeScale != 0)
+            auxTimeScale = Time.timeScale;
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            SetPause();
+        }
     }
 
-    public void CheckIfPause()
+    public void SetPause()
     {
-        if(Input.GetKeyDown(KeyCode.Escape))
-        {
+        isPaused = !isPaused;
+        Debug.Log("Is pause: " + isPaused.ToString());
+        if (isPaused)
             Time.timeScale = 0;
-        }
+        else
+            Time.timeScale = auxTimeScale;
+
+        Debug.Log("Time.timeScale: " + Time.timeScale);
     }
 }
