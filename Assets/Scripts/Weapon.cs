@@ -37,6 +37,7 @@ public class Weapon : MonoBehaviour
     [SerializeField] protected Camera cam;
     [SerializeField] protected MouseLook mouseLook;
 
+    [SerializeField] protected Animator anim;
 
     int pellets = 8;
     bool isReloading = false;
@@ -56,6 +57,11 @@ public class Weapon : MonoBehaviour
     protected int currentAmmo;
 
     public static event Action<Weapon, Transform> HitDamage;
+
+    void Start()
+    {
+        canShoot = false;
+    }
 
     protected void Shoot(ref int currentAmmo)
     {
@@ -147,5 +153,10 @@ public class Weapon : MonoBehaviour
             weaponIdChoice = 0;
             StartCoroutine(Reload(1));
         }
+    }
+    
+    public void CanShootAfterSpawn()
+    {
+        canShoot = true;
     }
 }

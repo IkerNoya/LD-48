@@ -18,6 +18,7 @@ public class Bailif : Weapon
         }
         if (Input.GetKey(KeyCode.Mouse0) && canShoot && shootTimer <= 0 && currentAmmo > 0)
         {
+            anim.SetTrigger("Shoot");
             Shoot(ref currentAmmo);
             mouseLook.AddRecoil(weaponData[weaponIdChoice].verticalRecoil, Random.Range(-weaponData[weaponIdChoice].horizontalRecoil, weaponData[weaponIdChoice].horizontalRecoil));
             if (audioSource != null)
