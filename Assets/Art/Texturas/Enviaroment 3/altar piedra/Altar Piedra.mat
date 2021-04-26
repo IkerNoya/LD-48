@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Plat_player
+  m_Name: Altar Piedra
   m_Shader: {fileID: 4800000, guid: 0e9d5a909a1f7e84882a534d0d11e49f, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
@@ -24,27 +24,27 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
-        m_Texture: {fileID: 2800000, guid: ebc2a6b8cfafaf74e81ddd3de2a35e51, type: 3}
+        m_Texture: {fileID: 2800000, guid: 178e5ac5693ea83428ef7622c44752aa, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EmissionMap:
-        m_Texture: {fileID: 2800000, guid: 1fce97656c8d3d54080791303dab7561, type: 3}
+        m_Texture: {fileID: 2800000, guid: ba89fb5964c01ae458e48069f38d26df, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 6d439f2e8cf1dfc4ab15f3a1ed7ad5ad, type: 3}
+        m_Texture: {fileID: 2800000, guid: e283215e15ad283428290eb7a82e9632, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
-        m_Texture: {fileID: 2800000, guid: 9775f4aed3b60194ab8cb64e983e795b, type: 3}
+        m_Texture: {fileID: 2800000, guid: 97346298ee4e4f54caa996adfb196df1, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
-        m_Texture: {fileID: 2800000, guid: 4ee9619471cb6814aadf0e07ac147ebf, type: 3}
+        m_Texture: {fileID: 2800000, guid: 3a7e87231156a66448cf8ca0fd7b2e4f, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SpecGlossMap:
-        m_Texture: {fileID: 2800000, guid: 4a0d61fa1e692a840b1a6f9053efca43, type: 3}
+        m_Texture: {fileID: 2800000, guid: c18bf76cfc67cfa4cab66f19b292e53d, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
@@ -82,7 +82,7 @@ Material:
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
     - _UvOffset: {r: 0, g: 0, b: 0, a: 0}
     - _UvTiling: {r: 1, g: 1, b: 0, a: 0}
---- !u!114 &7483107545933166521
+--- !u!114 &7669174280520163063
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
