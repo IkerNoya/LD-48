@@ -8,6 +8,10 @@ public class FPSController : MonoBehaviour
     [SerializeField] float sprintSpeed;
     [SerializeField] float crouchMovementSpeed;
     [SerializeField] float crouchSpeed;
+    [SerializeField] float slopeForce;
+    [SerializeField] float slopeRayLengh;
+    [SerializeField] float slideFriction;
+    [Space]
     [SerializeField] float lavaDamageValue;
     [Space]
     [SerializeField] float groundDistance;
@@ -46,6 +50,7 @@ public class FPSController : MonoBehaviour
     float lavaTimer;
     float maxLavaTimer = 1f;
 
+
     Vector3 movement;
     Vector3 velocity;
 
@@ -54,6 +59,7 @@ public class FPSController : MonoBehaviour
     bool isCrouched;
     bool isSlowMotionActivated=false;
     bool isInLava = false;
+    bool isOnASlope = false;
 
     void Start()
     {
@@ -68,6 +74,8 @@ public class FPSController : MonoBehaviour
 
     void Update()
     {
+        Debug.Log(OnSlope());
+        Debug.DrawRay(transform.position, Vector3.down * slopeRayLengh, Color.red);
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
 
         if (isGrounded && velocity.y < 0)
@@ -76,8 +84,8 @@ public class FPSController : MonoBehaviour
         //movement + sprint
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
-
-        movement = transform.right * x + transform.forward * z;
+        if(!OnSlope())
+            movement = transform.right * x + transform.forward * z;
         if(Input.GetButton("Horizontal") || Input.GetButton("Vertical"))
             timeWalking += Time.deltaTime;
         else
@@ -108,7 +116,6 @@ public class FPSController : MonoBehaviour
             }
             lavaTimer -= Time.deltaTime;
         }
-        Debug.Log(lavaTimer);
         //Functions
         Inputs();
         Movement();
@@ -118,10 +125,10 @@ public class FPSController : MonoBehaviour
     void Inputs()
     {
         //movement
-        if (isGrounded)
+        if (isGrounded && !OnSlope())
         {
             if (!sprintToggle)
-            {
+            { 
                 if (Input.GetKey(KeyCode.LeftShift))
                 {
                     isSprinting = true;
@@ -179,6 +186,7 @@ public class FPSController : MonoBehaviour
     }
     void Movement()
     {
+
         if (isSprinting)
         {
             if (!isInLava)
@@ -200,7 +208,11 @@ public class FPSController : MonoBehaviour
                 controller.Move(movement * speed * Time.deltaTime);
             else
                 controller.Move(movement * (speed / 2) * Time.deltaTime);
-
+        }
+        
+        if(OnSlope())
+        {
+            controller.Move(Vector3.down * controller.height / 2 * slopeForce * Time.deltaTime);
         }
     }
     //reparar
@@ -211,6 +223,43 @@ public class FPSController : MonoBehaviour
             height -= Time.deltaTime * crouchSpeed;
 
         camera.position = new Vector3(camera.position.x, height, camera.position.z);
+    }
+        
+    bool OnSlope()
+    {
+        if (!isGrounded) return false;
+
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, Vector3.down, out hit, controller.height / 2 * slopeRayLengh))
+        {
+            if (hit.normal.y < 0.98f)
+            {
+                Vector3 normal = hit.normal;
+                Vector3 groundParalell = Vector3.Cross(transform.up, normal);
+                Vector3 slopeParalell = Vector3.Cross(groundParalell, normal);
+                Debug.DrawRay(hit.point, slopeParalell * 10, Color.green);
+                float currentSlope = Mathf.Round(Vector3.Angle(hit.normal, transform.up));
+                Debug.Log("currentSlope: " + currentSlope);
+                if (currentSlope >= controller.slopeLimit)
+                {
+                    movement += slopeParalell.normalized / 2 * Time.deltaTime;
+                    return true;
+                }
+                else return false;
+            }
+        }
+
+        return false;
+    }
+
+    void SlopeSlide()
+    {
+        
+    }
+
+    void Slide()
+    {
+
     }
 
     void HeadBobbing()
