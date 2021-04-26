@@ -5178,6 +5178,7 @@ MonoBehaviour:
   slopeForce: 5
   slopeRayLengh: 1.905
   slideFriction: 0.3
+  slideSpeed: 0
   lavaDamageValue: 0
   anim: {fileID: 5853995039482270513}
   groundDistance: 0.4
