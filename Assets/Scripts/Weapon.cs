@@ -25,10 +25,13 @@ public class Weapon : MonoBehaviour
     [SerializeField] protected Camera cam;
     [SerializeField] protected MouseLook mouseLook;
     [Space]
-    [SerializeField] protected AudioSource fire;
-    [SerializeField] protected AudioSource reload;
+    [SerializeField] protected AudioSource audioSource;
+    [SerializeField] protected AudioClip shotgun;
+    [SerializeField] protected AudioClip revolver;
+    [SerializeField] protected AudioClip reload;
 
     int pellets = 8;
+    bool isReloading = false;
 
     enum AmmoType
     {
@@ -43,6 +46,18 @@ public class Weapon : MonoBehaviour
 
     public static event Action<Weapon, Transform> HitDamage;
 
+    void Update()
+    {
+        switch(ammoType)
+        {
+            case AmmoType.bullet:
+                if (!isReloading) audioSource.clip = revolver;
+                break;
+            case AmmoType.shell:
+                if (!isReloading) audioSource.clip = shotgun;
+                break;
+        }
+    }
 
     protected void Shoot(ref int currentAmmo)
     {
@@ -101,10 +116,12 @@ public class Weapon : MonoBehaviour
     }
     protected IEnumerator Reload(float timer)
     {
+        audioSource.clip = reload;
         canShoot = false;
         yield return new WaitForSeconds(timer);
         currentAmmo = ammo;
         canShoot = true;
+        isReloading = false;
         yield return null;
     }
     public int GetMaxAmmo()

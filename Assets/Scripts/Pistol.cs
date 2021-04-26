@@ -16,14 +16,14 @@ public class Pistol : Weapon
         {
             Shoot(ref currentAmmo);
             mouseLook.AddRecoil(verticalRecoil, Random.Range(-horizontalRecoil, horizontalRecoil));
-            if (fire != null)
-                fire.Play();
+            if (audioSource != null)
+                audioSource.Play();
         }
         if(Input.GetKeyDown(KeyCode.R) && currentAmmo < ammo)
         {
             StartCoroutine(Reload(2));
             if (reload != null)
-                reload.Play();
+                audioSource.Play();
         }
         shootTimer -= Time.deltaTime;
 
