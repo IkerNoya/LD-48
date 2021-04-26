@@ -9,10 +9,9 @@ public class PauseMenu : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Escape))
-        {
-            pauseMenu.gameObject.SetActive(!pauseMenu.gameObject.activeSelf);
-            GameManager.Get().SetPause();
-        }
+        if(Time.timeScale == 0)
+           pauseMenu.gameObject.SetActive(true);
+        else
+           pauseMenu.gameObject.SetActive(false);
     }
 }

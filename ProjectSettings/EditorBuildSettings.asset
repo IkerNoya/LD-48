@@ -35,4 +35,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/TL_Testing.unity
     guid: 014d2843de8156240901fcd21f1c1e76
+  - enabled: 1
+    path: Assets/Scenes/MainLevel.unity
+    guid: 22cbd145e4562c043aad69fc2082f714
   m_configObjects: {}

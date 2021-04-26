@@ -66,7 +66,7 @@ public class FPSController : MonoBehaviour
     bool isGrounded;
     bool isSprinting;
     bool isCrouched;
-    bool isSlowMotionActivated=false;
+    bool isSlowMotionActivated = false;
     bool isInLava = false;
     bool isOnASlope = false;
     bool canSlide = true;
@@ -87,72 +87,75 @@ public class FPSController : MonoBehaviour
 
     void Update()
     {
-        Debug.DrawRay(transform.position, Vector3.down * slopeRayLengh, Color.red);
-        isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
-
-        if (isGrounded && velocity.y < 0)
-            velocity.y = yNegativeVelocity;
-        //movement + sprint
-        if (!isSliding)
+        if (Time.timeScale != 0)
         {
-            float x = Input.GetAxis("Horizontal");
-            float z = Input.GetAxis("Vertical");
-            float animAxis = Mathf.Abs(Input.GetAxis("Horizontal")) + Mathf.Abs(Input.GetAxis("Vertical"));
-            if (!OnSlope())
+            Debug.DrawRay(transform.position, Vector3.down * slopeRayLengh, Color.red);
+            isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
+
+            if (isGrounded && velocity.y < 0)
+                velocity.y = yNegativeVelocity;
+            //movement + sprint
+            if (!isSliding)
             {
-                movement = transform.right * x + transform.forward * z;
-                anim.SetFloat("Axis", animAxis);
+                float x = Input.GetAxis("Horizontal");
+                float z = Input.GetAxis("Vertical");
+                float animAxis = Mathf.Abs(Input.GetAxis("Horizontal")) + Mathf.Abs(Input.GetAxis("Vertical"));
+                if (!OnSlope())
+                {
+                    movement = transform.right * x + transform.forward * z;
+                    anim.SetFloat("Axis", animAxis);
+                }
             }
-        }
-        if(Input.GetButton("Horizontal") || Input.GetButton("Vertical"))
-            timeWalking += Time.deltaTime;
-        else
-            timeWalking = 0;
-        
-        //jump + artificial gravity
-        velocity.y += gravity * Time.deltaTime;
-        controller.Move(velocity * Time.deltaTime);
+            if (Input.GetButton("Horizontal") || Input.GetButton("Vertical"))
+                timeWalking += Time.deltaTime;
+            else
+                timeWalking = 0;
 
-        //slow motion
-        if (isSlowMotionActivated) timeManager.SlowMotion(ref currentSlowMotionAmmount, isSlowMotionActivated);
-        else
-        {
-            timeManager.SlowMotion(ref currentSlowMotionAmmount, isSlowMotionActivated);
+            //jump + artificial gravity
+            velocity.y += gravity * Time.deltaTime;
+            controller.Move(velocity * Time.deltaTime);
 
-            if (currentSlowMotionAmmount < slowMotionAmmount) 
-                currentSlowMotionAmmount += Time.deltaTime * slowMotionRecovery;
-        }
-        if (currentSlowMotionAmmount <= 0) isSlowMotionActivated = false;
-
-        //health + Lava
-        if(isInLava)
-        {
-            if(lavaTimer <= 0)
+            //slow motion
+            if (isSlowMotionActivated) timeManager.SlowMotion(ref currentSlowMotionAmmount, isSlowMotionActivated);
+            else
             {
-                health.SubstractLife(lavaDamageValue);
-                TakeDamage();
-                lavaTimer = maxLavaTimer;
+                timeManager.SlowMotion(ref currentSlowMotionAmmount, isSlowMotionActivated);
+
+                if (currentSlowMotionAmmount < slowMotionAmmount)
+                    currentSlowMotionAmmount += Time.deltaTime * slowMotionRecovery;
             }
-            lavaTimer -= Time.deltaTime;
-        }
+            if (currentSlowMotionAmmount <= 0) isSlowMotionActivated = false;
+
+            //health + Lava
+            if (isInLava)
+            {
+                if (lavaTimer <= 0)
+                {
+                    health.SubstractLife(lavaDamageValue);
+                    TakeDamage();
+                    lavaTimer = maxLavaTimer;
+                }
+                lavaTimer -= Time.deltaTime;
+            }
 
 
-        if(slideTimer >= slideTimeLimit)
-        {
-            canSlide = true;
+            if (slideTimer >= slideTimeLimit)
+            {
+                canSlide = true;
+            }
+            if (!canSlide)
+                slideTimer += Time.deltaTime;
+            //Functions
+            Inputs();
+            Movement();
+            Crouch();
+            HeadBobbing();
         }
-        if(!canSlide)
-            slideTimer += Time.deltaTime;
-        //Functions
-        Inputs();
-        Movement();
-        Crouch();
-        HeadBobbing();
     }
     void Inputs()
     {
         //movement
-        if(!isSliding)
+        if (!isSliding)
             slideForward = transform.forward;
         if (isGrounded && !OnSlope())
         {
@@ -216,11 +219,11 @@ public class FPSController : MonoBehaviour
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity); // jump formula: result = sqrt( h * -2 * g)
 
         //slow motion
-        if(Input.GetKeyDown(KeyCode.F) && currentSlowMotionAmmount > slowMotionAmmount/4 && !isSlowMotionActivated)
+        if (Input.GetKeyDown(KeyCode.F) && currentSlowMotionAmmount > slowMotionAmmount / 4 && !isSlowMotionActivated)
         {
             isSlowMotionActivated = true;
         }
-        else if(Input.GetKeyDown(KeyCode.F) && isSlowMotionActivated)
+        else if (Input.GetKeyDown(KeyCode.F) && isSlowMotionActivated)
         {
             isSlowMotionActivated = false;
         }
@@ -238,22 +241,22 @@ public class FPSController : MonoBehaviour
         }
         if (isCrouched && !isSliding)
         {
-            if(!isInLava)
+            if (!isInLava)
                 controller.Move(movement * crouchMovementSpeed * Time.deltaTime);
             else
                 controller.Move(movement * (crouchMovementSpeed / 2) * Time.deltaTime);
-                
+
         }
         if (!isSprinting && !isCrouched)
         {
             slidingFriction = 7;
-            if(!isInLava)
+            if (!isInLava)
                 controller.Move(movement * speed * Time.deltaTime);
             else
                 controller.Move(movement * (speed / 2) * Time.deltaTime);
         }
-        
-        if(OnSlope())
+
+        if (OnSlope())
         {
             controller.Move(Vector3.down * controller.height / 2 * slopeForce * Time.deltaTime);
         }
@@ -276,7 +279,7 @@ public class FPSController : MonoBehaviour
 
         camera.position = new Vector3(camera.position.x, height, camera.position.z);
     }
-        
+
     bool OnSlope()
     {
         if (!isGrounded) return false;
@@ -328,7 +331,7 @@ public class FPSController : MonoBehaviour
     void HeadBobbing()
     {
         Vector3 newHeadPosition;
-        if(!isCrouched)
+        if (!isCrouched)
             newHeadPosition = head.position + CalculateHeadBobOffset(timeWalking);
         else
             newHeadPosition = crouchCamPos.position + CalculateHeadBobOffset(timeWalking);
@@ -357,7 +360,7 @@ public class FPSController : MonoBehaviour
                 camera.position = newHeadPosition;
             }
         }
-        
+
 
     }
     Vector3 CalculateHeadBobOffset(float value)
@@ -386,7 +389,7 @@ public class FPSController : MonoBehaviour
     {
         return isInLava;
     }
-    
+
 
     void OnControllerColliderHit(ControllerColliderHit hit)
     {
