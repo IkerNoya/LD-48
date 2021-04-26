@@ -1,0 +1,5 @@
+IDLE to RUN  0-8
+RUN          8-29
+ATTACK       30-56
+HURT         60-75
+DEATH        80-110
