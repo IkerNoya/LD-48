@@ -11,6 +11,7 @@ public class FPSController : MonoBehaviour
     [SerializeField] float slopeForce;
     [SerializeField] float slopeRayLengh;
     [SerializeField] float slideFriction;
+    [SerializeField] float slideSpeed;
     [Space]
     [SerializeField] float lavaDamageValue;
     [Space]
@@ -51,8 +52,14 @@ public class FPSController : MonoBehaviour
     float currentSlowMotionAmmount;
     float lavaTimer;
     float maxLavaTimer = 1f;
+    float originalHeight;
+    float originalSlideSpeed;
+    float slidingFriction;
+    float slideTimer = 0;
+    float slideTimeLimit = 1;
 
 
+    Vector3 slideForward;
     Vector3 movement;
     Vector3 velocity;
 
@@ -62,6 +69,8 @@ public class FPSController : MonoBehaviour
     bool isSlowMotionActivated=false;
     bool isInLava = false;
     bool isOnASlope = false;
+    bool canSlide = true;
+    bool isSliding = false;
 
     void Start()
     {
@@ -72,25 +81,28 @@ public class FPSController : MonoBehaviour
         currentSlowMotionAmmount = slowMotionAmmount;
         timeManager = TimeManager.Instance;
         health = GetComponent<HealthSystem>();
+        originalHeight = controller.height;
+        originalSlideSpeed = slideSpeed;
     }
 
     void Update()
     {
-        Debug.Log(OnSlope());
         Debug.DrawRay(transform.position, Vector3.down * slopeRayLengh, Color.red);
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
 
         if (isGrounded && velocity.y < 0)
             velocity.y = yNegativeVelocity;
-
         //movement + sprint
-        float x = Input.GetAxis("Horizontal");
-        float z = Input.GetAxis("Vertical");
-        float animAxis = Mathf.Abs(Input.GetAxis("Horizontal")) + Mathf.Abs(Input.GetAxis("Vertical"));
-        if (!OnSlope())
+        if (!isSliding)
         {
-            movement = transform.right * x + transform.forward * z;
-            anim.SetFloat("Axis", animAxis);
+            float x = Input.GetAxis("Horizontal");
+            float z = Input.GetAxis("Vertical");
+            float animAxis = Mathf.Abs(Input.GetAxis("Horizontal")) + Mathf.Abs(Input.GetAxis("Vertical"));
+            if (!OnSlope())
+            {
+                movement = transform.right * x + transform.forward * z;
+                anim.SetFloat("Axis", animAxis);
+            }
         }
         if(Input.GetButton("Horizontal") || Input.GetButton("Vertical"))
             timeWalking += Time.deltaTime;
@@ -122,6 +134,14 @@ public class FPSController : MonoBehaviour
             }
             lavaTimer -= Time.deltaTime;
         }
+
+
+        if(slideTimer >= slideTimeLimit)
+        {
+            canSlide = true;
+        }
+        if(!canSlide)
+            slideTimer += Time.deltaTime;
         //Functions
         Inputs();
         Movement();
@@ -131,48 +151,62 @@ public class FPSController : MonoBehaviour
     void Inputs()
     {
         //movement
+        if(!isSliding)
+            slideForward = transform.forward;
         if (isGrounded && !OnSlope())
         {
-            if (!sprintToggle)
-            { 
-                if (Input.GetKey(KeyCode.LeftShift))
-                {
-                    isSprinting = true;
-                    isCrouched = false;
-                }
-                else
-                    isSprinting = false;
-            }
-            else
+            if (Input.GetKey(KeyCode.C) && !isCrouched && canSlide)
             {
-                if (Input.GetKeyDown(KeyCode.LeftShift) && !isSprinting)
-                {
-                    isSprinting = true;
-                    isCrouched = false;
-                }
-                else if (Input.GetKeyDown(KeyCode.LeftShift) && isSprinting)
-                    isSprinting = false;
+                isSliding = true;
             }
+            else if (Input.GetKeyUp(KeyCode.C))
+            {
+                isSliding = false;
+            }
+            if (!isSliding)
+            {
 
-            if (!crouchToggle)
-            {
-                if (Input.GetKey(KeyCode.LeftControl))
+                if (!sprintToggle)
                 {
-                    isCrouched = true;
-                    isSprinting = false;
+                    if (Input.GetKey(KeyCode.LeftShift))
+                    {
+                        isSprinting = true;
+                        isCrouched = false;
+                    }
+                    else
+                        isSprinting = false;
                 }
                 else
-                    isCrouched = false;
-            }
-            else
-            {
-                if (Input.GetKeyDown(KeyCode.LeftControl) && !isCrouched)
                 {
-                    isCrouched = true;
-                    isSprinting = false;
+                    if (Input.GetKeyDown(KeyCode.LeftShift) && !isSprinting)
+                    {
+                        isSprinting = true;
+                        isCrouched = false;
+                    }
+                    else if (Input.GetKeyDown(KeyCode.LeftShift) && isSprinting)
+                        isSprinting = false;
                 }
-                else if (Input.GetKeyDown(KeyCode.LeftControl) && isCrouched)
-                    isCrouched = false;
+
+                if (!crouchToggle)
+                {
+                    if (Input.GetKey(KeyCode.LeftControl))
+                    {
+                        isCrouched = true;
+                        isSprinting = false;
+                    }
+                    else
+                        isCrouched = false;
+                }
+                else
+                {
+                    if (Input.GetKeyDown(KeyCode.LeftControl) && !isCrouched)
+                    {
+                        isCrouched = true;
+                        isSprinting = false;
+                    }
+                    else if (Input.GetKeyDown(KeyCode.LeftControl) && isCrouched)
+                        isCrouched = false;
+                }
             }
         }
 
@@ -195,12 +229,13 @@ public class FPSController : MonoBehaviour
 
         if (isSprinting)
         {
+            slidingFriction = 10;
             if (!isInLava)
                 controller.Move(movement * sprintSpeed * Time.deltaTime);
             else
                 controller.Move(movement * (sprintSpeed / 2) * Time.deltaTime);
         }
-        if (isCrouched)
+        if (isCrouched && !isSliding)
         {
             if(!isInLava)
                 controller.Move(movement * crouchMovementSpeed * Time.deltaTime);
@@ -210,6 +245,7 @@ public class FPSController : MonoBehaviour
         }
         if (!isSprinting && !isCrouched)
         {
+            slidingFriction = 7;
             if(!isInLava)
                 controller.Move(movement * speed * Time.deltaTime);
             else
@@ -219,6 +255,15 @@ public class FPSController : MonoBehaviour
         if(OnSlope())
         {
             controller.Move(Vector3.down * controller.height / 2 * slopeForce * Time.deltaTime);
+        }
+
+        if (isSliding)
+        {
+            Slide();
+        }
+        else
+        {
+            slideSpeed = originalSlideSpeed;
         }
     }
     //reparar
@@ -258,14 +303,25 @@ public class FPSController : MonoBehaviour
         return false;
     }
 
-    void SlopeSlide()
-    {
-        
-    }
-
     void Slide()
     {
+        isCrouched = true;
+        controller.Move(slideForward * slideSpeed * Time.deltaTime);
+        slideSpeed -= Time.deltaTime * slidingFriction;
+        if (slideSpeed <= 0)
+        {
+            controller.Move(Vector3.zero);
+            slideTimer = 0;
+            canSlide = false;
+            GetUp();
+        }
+    }
 
+    void GetUp()
+    {
+        isSliding = false;
+        isCrouched = false;
+        slideSpeed = originalSlideSpeed;
     }
 
     void HeadBobbing()

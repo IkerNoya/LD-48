@@ -227,57 +227,6 @@ MonoBehaviour:
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
---- !u!114 &7978495451953057232
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 907032225536594929}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 052ad562c5141504fbc1655207968750, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  weaponData:
-  - ammoType: 0
-    ammo: 8
-    fireRate: 1.5
-    damage: 15
-    verticalRecoil: 6
-    horizontalRecoil: 1
-    range: 20
-    reloadSpeed: 2
-    spreadX: 0.03
-    spreadY: 0.03
-    muzzleFlash: {fileID: 4492779987944622170}
-    hitEnvironment: {fileID: 198000013440722320, guid: 02a509a7fa70ed740ba4197e20c5d32d,
-      type: 3}
-    hitEnemy: {fileID: 198000013597187216, guid: 83e55d3418297934fab882559d009285,
-      type: 3}
-    fire: {fileID: 8300000, guid: a86cc9d8d222b9a4689374da39a7deee, type: 3}
-    reload: {fileID: 0}
-  - ammoType: 1
-    ammo: 12
-    fireRate: 0.25
-    damage: 40
-    verticalRecoil: 2
-    horizontalRecoil: 1
-    range: 40
-    reloadSpeed: 2
-    spreadX: 0
-    spreadY: 0
-    muzzleFlash: {fileID: 4492779987944622170}
-    hitEnvironment: {fileID: 198000013440722320, guid: 02a509a7fa70ed740ba4197e20c5d32d,
-      type: 3}
-    hitEnemy: {fileID: 198000013597187216, guid: 83e55d3418297934fab882559d009285,
-      type: 3}
-    fire: {fileID: 8300000, guid: 211b8161a3a95bf479941e5e076fc1ae, type: 3}
-    reload: {fileID: 0}
-  audioSource: {fileID: 687863820}
-  cam: {fileID: 8512898870580149753}
-  mouseLook: {fileID: 8512898870580149759}
-  anim: {fileID: 5853995039482270513}
 --- !u!82 &687863820
 AudioSource:
   m_ObjectHideFlags: 0
@@ -374,6 +323,57 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &7978495451953057232
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 907032225536594929}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 052ad562c5141504fbc1655207968750, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponData:
+  - ammoType: 0
+    ammo: 8
+    fireRate: 1.5
+    damage: 15
+    verticalRecoil: 6
+    horizontalRecoil: 1
+    range: 20
+    reloadSpeed: 2
+    spreadX: 0.03
+    spreadY: 0.03
+    muzzleFlash: {fileID: 4492779987944622170}
+    hitEnvironment: {fileID: 198000013440722320, guid: 02a509a7fa70ed740ba4197e20c5d32d,
+      type: 3}
+    hitEnemy: {fileID: 198000013597187216, guid: 83e55d3418297934fab882559d009285,
+      type: 3}
+    fire: {fileID: 8300000, guid: a86cc9d8d222b9a4689374da39a7deee, type: 3}
+    reload: {fileID: 0}
+  - ammoType: 1
+    ammo: 12
+    fireRate: 0.25
+    damage: 40
+    verticalRecoil: 2
+    horizontalRecoil: 1
+    range: 40
+    reloadSpeed: 2
+    spreadX: 0
+    spreadY: 0
+    muzzleFlash: {fileID: 4492779987944622170}
+    hitEnvironment: {fileID: 198000013440722320, guid: 02a509a7fa70ed740ba4197e20c5d32d,
+      type: 3}
+    hitEnemy: {fileID: 198000013597187216, guid: 83e55d3418297934fab882559d009285,
+      type: 3}
+    fire: {fileID: 8300000, guid: 211b8161a3a95bf479941e5e076fc1ae, type: 3}
+    reload: {fileID: 0}
+  audioSource: {fileID: 687863820}
+  cam: {fileID: 8512898870580149753}
+  mouseLook: {fileID: 8512898870580149759}
+  anim: {fileID: 5853995039482270513}
 --- !u!1 &4388034285718578578
 GameObject:
   m_ObjectHideFlags: 0
@@ -5178,6 +5178,7 @@ MonoBehaviour:
   slopeForce: 5
   slopeRayLengh: 1.905
   slideFriction: 0.3
+  slideSpeed: 0
   lavaDamageValue: 0
   anim: {fileID: 5853995039482270513}
   groundDistance: 0.4
