@@ -746,7 +746,7 @@ GameObject:
   - component: {fileID: 426878331}
   - component: {fileID: 426878330}
   m_Layer: 5
-  m_Name: Image
+  m_Name: PanelControls
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -844,7 +844,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -6.8, y: -199.11}
+  m_AnchoredPosition: {x: -6.8, y: -265}
   m_SizeDelta: {x: 356.3, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &479543340
@@ -867,10 +867,10 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 0.6226415, g: 0.21440013, b: 0.21440013, a: 1}
-    m_HighlightedColor: {r: 0.990566, g: 0.6443853, b: 0.5093005, a: 1}
+    m_NormalColor: {r: 0.9607844, g: 0.8000001, b: 0, a: 1}
+    m_HighlightedColor: {r: 0.745283, g: 0.23047665, b: 0.13007298, a: 1}
     m_PressedColor: {r: 1, g: 0, b: 0, a: 1}
-    m_SelectedColor: {r: 0.59607846, g: 0.20784315, b: 0.20784315, a: 1}
+    m_SelectedColor: {r: 0.7830189, g: 0.683332, b: 0.12927197, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -947,7 +947,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.62352943, g: 0, b: 0, a: 1}
+  m_Color: {r: 0.8207547, g: 0.6834039, b: 0, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -1098,7 +1098,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.5943396, g: 0.36165005, b: 0.36165005, a: 1}
+  m_Color: {r: 0.20754719, g: 0.051886797, b: 0.051886797, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -1349,7 +1349,7 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_HighlightedColor: {r: 0.9960785, g: 0.87843144, b: 0, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
@@ -1978,7 +1978,7 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_HighlightedColor: {r: 0.97647065, g: 0.882353, b: 0.11764707, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
@@ -2106,7 +2106,7 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_NormalColor: {r: 0.9150943, g: 0.9150943, b: 0.9150943, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -2322,6 +2322,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sfxVolume: {fileID: 842679259}
   musicVolume: {fileID: 1742311580}
+  verticalPlayerSensi: {fileID: 479543340}
+  horizontalPlayerSensi: {fileID: 1462321080}
   playerToggleCrouch: {fileID: 1148071780}
   playerToggleSprint: {fileID: 920069912}
   panelAudio: {fileID: 559958688}
@@ -2412,7 +2414,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.5943396, g: 0.36165005, b: 0.36165005, a: 1}
+  m_Color: {r: 0.16470589, g: 0.03529412, b: 0.03137255, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -2565,7 +2567,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.62352943, g: 0, b: 0, a: 1}
+  m_Color: {r: 0.8018868, g: 0.6676935, b: 0, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -2810,7 +2812,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -8, y: -267}
+  m_AnchoredPosition: {x: -8, y: -200}
   m_SizeDelta: {x: 356.3, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1462321080
@@ -2833,10 +2835,10 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 0.6226415, g: 0.21440013, b: 0.21440013, a: 1}
-    m_HighlightedColor: {r: 0.990566, g: 0.6443853, b: 0.5093005, a: 1}
-    m_PressedColor: {r: 1, g: 0, b: 0, a: 1}
-    m_SelectedColor: {r: 0.59607846, g: 0.20784315, b: 0.20784315, a: 1}
+    m_NormalColor: {r: 1, g: 0.83413935, b: 0, a: 1}
+    m_HighlightedColor: {r: 0.7264151, g: 0.25099027, b: 0.16789784, a: 1}
+    m_PressedColor: {r: 0.8301887, g: 0.011747932, b: 0.011747932, a: 1}
+    m_SelectedColor: {r: 0.7075472, g: 0.56194574, b: 0.15018693, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -3425,7 +3427,7 @@ GameObject:
   - component: {fileID: 1898904046}
   - component: {fileID: 1898904045}
   m_Layer: 5
-  m_Name: Image
+  m_Name: PanelAudio
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

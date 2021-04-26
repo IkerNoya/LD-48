@@ -71,5 +71,13 @@ public class DataManager : MonoBehaviour
     {
         horizontalSensitivity = value;
     }
+    public float GetHorizontalSesitivity()
+    {
+        return horizontalSensitivity;
+    }
+    public float GetVerticalSesitivity()
+    {
+        return verticalSensitivity;
+    }
     #endregion
 }
