@@ -11,6 +11,9 @@ public class UIOptions : MonoBehaviour
     [SerializeField] public Toggle playerToggleCrouch;
     [SerializeField] public Toggle playerToggleSprint;
 
+    [SerializeField] public GameObject panelAudio;
+    [SerializeField] public GameObject panelControl;
+
     private float sfxVolu = 0;
     private float musicVolu = 0;
     private bool togPjCrouch = false;
@@ -33,5 +36,15 @@ public class UIOptions : MonoBehaviour
         DataManager.instance.SetTogglePlayerCrouch(togPjCrouch);
         DataManager.instance.SetTogglePlayerSprint(togPjSprint);
         //Audio manager seteo de volumen
+    }
+    public void ActivePanelAudio()
+    {
+        panelAudio.SetActive(true);
+        panelControl.SetActive(false);
+    }
+    public void ActivePanelControls()
+    {
+        panelAudio.SetActive(false);
+        panelControl.SetActive(true);
     }
 }

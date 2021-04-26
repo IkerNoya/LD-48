@@ -11,6 +11,9 @@ public class DataManager : MonoBehaviour
 
     [SerializeField] private bool playerCrouch;
     [SerializeField] private bool playerSprint;
+
+    [SerializeField] private float verticalSensitivity;
+    [SerializeField] private float horizontalSensitivity;
     void Awake()
     {
         if(instance != null)
@@ -59,6 +62,14 @@ public class DataManager : MonoBehaviour
     public bool GetPlayerToggleSprint()
     {
         return playerSprint;
+    }
+    public void SetVerticalSensitivity(float value)
+    {
+        verticalSensitivity = value;
+    }
+    public void SetHorizontalSensitivity(float value)
+    {
+        horizontalSensitivity = value;
     }
     #endregion
 }
