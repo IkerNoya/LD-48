@@ -1,0 +1,11 @@
+IDLE   1-20
+WALK    20-45
+ATTACK   50-83
+RELOAD (Inicio)   90-110
+RELOAD (Fin)      120-166
+RUN (Inicio)   170-177
+RUN (Loop)   182-202
+RUN (Fin)   207-215
+DASH (Inicio)   220-229
+DASH (Disparo)   230-265
+DASH (Fin)   267-275

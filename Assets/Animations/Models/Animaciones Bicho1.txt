@@ -1,3 +1,0 @@
-IDLE     1-40
-ATTACK   45-85
-DEATH    90-125
