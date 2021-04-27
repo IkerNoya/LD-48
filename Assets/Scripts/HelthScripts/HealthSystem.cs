@@ -25,7 +25,7 @@ public class HealthSystem : MonoBehaviour
         {
             if (timer >= timerLimit)
             {
-                if (life > maxLife)
+                if (life < maxLife)
                     life += Time.deltaTime * healingSpeed;
             }
             else
