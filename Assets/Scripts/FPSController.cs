@@ -71,6 +71,7 @@ public class FPSController : MonoBehaviour
     bool isOnASlope = false;
     bool canSlide = true;
     bool isSliding = false;
+    bool isSlidingInput = false;
 
     void Start()
     {
@@ -87,14 +88,14 @@ public class FPSController : MonoBehaviour
 
     void Update()
     {
+        Debug.DrawRay(transform.position, Vector3.down * slopeRayLengh, Color.red);
+        isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
+
+        if (isGrounded && velocity.y < 0)
+            velocity.y = yNegativeVelocity;
+        //movement + sprint
         if (Time.timeScale != 0)
         {
-            Debug.DrawRay(transform.position, Vector3.down * slopeRayLengh, Color.red);
-            isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
-
-            if (isGrounded && velocity.y < 0)
-                velocity.y = yNegativeVelocity;
-            //movement + sprint
             if (!isSliding)
             {
                 float x = Input.GetAxis("Horizontal");
@@ -105,16 +106,17 @@ public class FPSController : MonoBehaviour
                     movement = transform.right * x + transform.forward * z;
                     anim.SetFloat("Axis", animAxis);
                 }
+                anim.SetBool("isRunning", isSprinting);
             }
+            anim.SetBool("isSliding", isSliding);
             if (Input.GetButton("Horizontal") || Input.GetButton("Vertical"))
                 timeWalking += Time.deltaTime;
             else
                 timeWalking = 0;
-
             //jump + artificial gravity
             velocity.y += gravity * Time.deltaTime;
             controller.Move(velocity * Time.deltaTime);
-
+            if (!isGrounded) isSprinting = false;
             //slow motion
             if (isSlowMotionActivated) timeManager.SlowMotion(ref currentSlowMotionAmmount, isSlowMotionActivated);
             else
@@ -145,6 +147,7 @@ public class FPSController : MonoBehaviour
             }
             if (!canSlide)
                 slideTimer += Time.deltaTime;
+
             //Functions
             Inputs();
             Movement();
@@ -157,9 +160,9 @@ public class FPSController : MonoBehaviour
         //movement
         if (!isSliding)
             slideForward = transform.forward;
-        if (isGrounded && !OnSlope())
+        if (!OnSlope())
         {
-            if (Input.GetKey(KeyCode.C) && !isCrouched && canSlide)
+            if (Input.GetKey(KeyCode.C) && !isCrouched && canSlide && isGrounded)
             {
                 isSliding = true;
             }
@@ -174,7 +177,8 @@ public class FPSController : MonoBehaviour
                 {
                     if (Input.GetKey(KeyCode.LeftShift))
                     {
-                        isSprinting = true;
+                        if (isGrounded)
+                            isSprinting = true;
                         isCrouched = false;
                     }
                     else
@@ -184,8 +188,11 @@ public class FPSController : MonoBehaviour
                 {
                     if (Input.GetKeyDown(KeyCode.LeftShift) && !isSprinting)
                     {
-                        isSprinting = true;
-                        isCrouched = false;
+                        if (isGrounded)
+                        {
+                            isSprinting = true;
+                            isCrouched = false;
+                        }
                     }
                     else if (Input.GetKeyDown(KeyCode.LeftShift) && isSprinting)
                         isSprinting = false;
@@ -195,8 +202,11 @@ public class FPSController : MonoBehaviour
                 {
                     if (Input.GetKey(KeyCode.LeftControl))
                     {
-                        isCrouched = true;
-                        isSprinting = false;
+                        if (isGrounded)
+                        {
+                            isCrouched = true;
+                            isSprinting = false;
+                        }
                     }
                     else
                         isCrouched = false;
@@ -205,8 +215,11 @@ public class FPSController : MonoBehaviour
                 {
                     if (Input.GetKeyDown(KeyCode.LeftControl) && !isCrouched)
                     {
-                        isCrouched = true;
-                        isSprinting = false;
+                        if (isGrounded)
+                        {
+                            isCrouched = true;
+                            isSprinting = false;
+                        }
                     }
                     else if (Input.GetKeyDown(KeyCode.LeftControl) && isCrouched)
                         isCrouched = false;
@@ -216,7 +229,10 @@ public class FPSController : MonoBehaviour
 
         //jump
         if (Input.GetButtonDown("Jump") && isGrounded)
+        {
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity); // jump formula: result = sqrt( h * -2 * g)
+            isSprinting = false;
+        }
 
         //slow motion
         if (Input.GetKeyDown(KeyCode.F) && currentSlowMotionAmmount > slowMotionAmmount / 4 && !isSlowMotionActivated)
@@ -294,7 +310,6 @@ public class FPSController : MonoBehaviour
                 Vector3 slopeParalell = Vector3.Cross(groundParalell, normal);
                 Debug.DrawRay(hit.point, slopeParalell * 10, Color.green);
                 float currentSlope = Mathf.Round(Vector3.Angle(hit.normal, transform.up));
-                Debug.Log("currentSlope: " + currentSlope);
                 if (currentSlope >= controller.slopeLimit)
                 {
                     movement += slopeParalell.normalized / 2 * Time.deltaTime;
@@ -309,6 +324,7 @@ public class FPSController : MonoBehaviour
 
     void Slide()
     {
+        isSlidingInput = true;
         isCrouched = true;
         controller.Move(slideForward * slideSpeed * Time.deltaTime);
         slideSpeed -= Time.deltaTime * slidingFriction;
@@ -323,7 +339,7 @@ public class FPSController : MonoBehaviour
 
     void GetUp()
     {
-        isSliding = false;
+        isSlidingInput = false;
         isCrouched = false;
         slideSpeed = originalSlideSpeed;
     }

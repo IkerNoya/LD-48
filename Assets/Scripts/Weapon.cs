@@ -40,13 +40,13 @@ public class Weapon : MonoBehaviour
     [SerializeField] protected Animator anim;
 
     int pellets = 8;
-    bool isReloading = false;
     bool isChangingWeaponMode = false;
 
     public enum AmmoType
     {
         shell, bullet
     };
+    protected bool isReloading = false;
 
     protected int weaponIdChoice = 0;
 
@@ -121,6 +121,7 @@ public class Weapon : MonoBehaviour
     }
     protected IEnumerator Reload(float timer)
     {
+        anim.SetTrigger("Reload");
         audioSource.clip = weaponData[weaponIdChoice].reload;
         isChangingWeaponMode = true;
         canShoot = false;
