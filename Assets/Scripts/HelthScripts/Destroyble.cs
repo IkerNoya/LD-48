@@ -8,4 +8,5 @@ public class Destroyble : MonoBehaviour
     {
         Destroy(gameObject, time);
     }
+
 }

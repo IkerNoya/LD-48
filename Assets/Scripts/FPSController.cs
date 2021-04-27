@@ -34,6 +34,10 @@ public class FPSController : MonoBehaviour
     [SerializeField] Transform crouchCamPos;
     [SerializeField] Transform camera;
     [SerializeField] LayerMask groundMask;
+    [Space]
+    [SerializeField] GameObject CharacterImageGood;
+    [SerializeField] GameObject CharacterImageDamage;
+    [SerializeField] GameObject CharacterImageDying;
 
     public bool crouchToggle;
     public bool sprintToggle;
@@ -88,6 +92,14 @@ public class FPSController : MonoBehaviour
 
     void Update()
     {
+
+        if (health.CheckDie())
+        {
+            SceneLoader.Get().LoadScene("GameOver");
+            Cursor.lockState = CursorLockMode.None;
+            return;
+        }
+
         Debug.DrawRay(transform.position, Vector3.down * slopeRayLengh, Color.red);
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
 
@@ -136,6 +148,7 @@ public class FPSController : MonoBehaviour
                     health.SubstractLife(lavaDamageValue);
                     TakeDamage();
                     lavaTimer = maxLavaTimer;
+
                 }
                 lavaTimer -= Time.deltaTime;
             }
@@ -148,11 +161,13 @@ public class FPSController : MonoBehaviour
             if (!canSlide)
                 slideTimer += Time.deltaTime;
 
+
             //Functions
             Inputs();
             Movement();
             Crouch();
             HeadBobbing();
+            DamageRepresentation();
         }
     }
     void Inputs()
@@ -393,6 +408,30 @@ public class FPSController : MonoBehaviour
         }
         return offset;
     }
+
+    void DamageRepresentation()
+    {
+        if(health.GetLife() > health.GetMaxLife() - health.GetMaxLife() / 3)
+        {
+            CharacterImageGood.SetActive(true);
+            CharacterImageDamage.SetActive(false);
+            CharacterImageDying.SetActive(false);
+        }
+        else if (health.GetLife() < health.GetMaxLife() - (health.GetMaxLife() / 3))
+        {
+            CharacterImageGood.SetActive(false);
+            CharacterImageDamage.SetActive(true);
+            CharacterImageDying.SetActive(false);
+        }
+        else if (health.GetLife() < health.GetMaxLife() - (health.GetMaxLife() / 3 * 2))
+        {
+            CharacterImageGood.SetActive(true);
+            CharacterImageDamage.SetActive(false);
+            CharacterImageDying.SetActive(false);
+        }
+
+    }
+
     void TakeDamage()
     {
         //Special Effects
