@@ -5,6 +5,7 @@ using UnityEngine;
 public class DamageableForEnemys : MonoBehaviour
 {
     [SerializeField] HealthSystem healthSystem;
+	
     FPSController player;
     void OnEnable()
     {
@@ -31,7 +32,8 @@ public class DamageableForEnemys : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        StartCoroutine(player.TakeDamage(0.2f));
+       if(player != null)
+               StartCoroutine(player.TakeDamage(0.2f));
         healthSystem.SubstractLife(damage);
         healthSystem.CheckDieEvent();
     }
