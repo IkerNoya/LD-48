@@ -23,12 +23,12 @@ public class UnlockedElevator : MonoBehaviour
 
         if (transform.position.y >= targetOpenDoor.position.y)
         {
-            if(leftDoor.transform.position.x > targetDoorLeft.position.x)
-                leftDoor.transform.position = Vector3.MoveTowards(transform.position, targetDoorLeft.position, speedMovement * Time.deltaTime);
+            //if(targetDoorLeft.position.x > leftDoor.transform.position.x)
+                leftDoor.transform.position = Vector3.MoveTowards(leftDoor.transform.position, targetDoorLeft.position, speedMovement * Time.deltaTime);
 
 
-            if (rightDoor.transform.position.x < targetDoorRight.position.x)
-                rightDoor.transform.position = Vector3.MoveTowards(transform.position, targetDoorRight.position, speedMovement * Time.deltaTime);
+            //if ( targetDoorRight.position.x < rightDoor.transform.position.x)
+                rightDoor.transform.position = Vector3.MoveTowards(rightDoor.transform.position, targetDoorRight.position, speedMovement * Time.deltaTime);
 
         }
     }
