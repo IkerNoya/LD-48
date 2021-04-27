@@ -5,6 +5,7 @@ using UnityEngine;
 public class DamageableForEnemys : MonoBehaviour
 {
     [SerializeField] HealthSystem healthSystem;
+    FPSController player;
     void OnEnable()
     {
         Perseguidor.OnDamagePerseguidor += TakeDamage;
@@ -13,6 +14,11 @@ public class DamageableForEnemys : MonoBehaviour
     void OnDisable()
     {
         Perseguidor.OnDamagePerseguidor -= TakeDamage;
+    }
+
+    void Start()
+    {
+        player = GetComponent<FPSController>();
     }
 
     void TakeDamage(float damage, Transform targetTransform)
@@ -25,6 +31,7 @@ public class DamageableForEnemys : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
+        StartCoroutine(player.TakeDamage(0.2f));
         healthSystem.SubstractLife(damage);
         healthSystem.CheckDieEvent();
     }

@@ -38,6 +38,9 @@ public class FPSController : MonoBehaviour
     [SerializeField] GameObject CharacterImageGood;
     [SerializeField] GameObject CharacterImageDamage;
     [SerializeField] GameObject CharacterImageDying;
+    [SerializeField] GameObject Damage;
+    [Space]
+
 
     public bool crouchToggle;
     public bool sprintToggle;
@@ -145,8 +148,8 @@ public class FPSController : MonoBehaviour
             {
                 if (lavaTimer <= 0)
                 {
+                    StartCoroutine(TakeDamage(0.2f));
                     health.SubstractLife(lavaDamageValue);
-                    TakeDamage();
                     lavaTimer = maxLavaTimer;
 
                 }
@@ -417,7 +420,7 @@ public class FPSController : MonoBehaviour
             CharacterImageDamage.SetActive(false);
             CharacterImageDying.SetActive(false);
         }
-        else if (health.GetLife() < health.GetMaxLife() - (health.GetMaxLife() / 3))
+        else if (health.GetLife() < health.GetMaxLife() - (health.GetMaxLife() / 3) && health.GetLife() > health.GetMaxLife() - (health.GetMaxLife() / 3 * 2))
         {
             CharacterImageGood.SetActive(false);
             CharacterImageDamage.SetActive(true);
@@ -425,16 +428,19 @@ public class FPSController : MonoBehaviour
         }
         else if (health.GetLife() < health.GetMaxLife() - (health.GetMaxLife() / 3 * 2))
         {
-            CharacterImageGood.SetActive(true);
+            CharacterImageGood.SetActive(false);
             CharacterImageDamage.SetActive(false);
-            CharacterImageDying.SetActive(false);
+            CharacterImageDying.SetActive(true);
         }
 
     }
 
-    void TakeDamage()
+    public IEnumerator TakeDamage(float timer)
     {
-        //Special Effects
+        Damage.SetActive(true);
+        yield return new WaitForSeconds(timer);
+        Damage.SetActive(false);
+        yield return null;
     }
     public float GetSlowMotionAmmount()
     {

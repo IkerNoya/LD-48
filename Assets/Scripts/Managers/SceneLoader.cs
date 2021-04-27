@@ -22,18 +22,18 @@ public class SceneLoader : MonoBehaviour
     }
     public void Start()
     {
-            if(AudioManager.instance != null) AudioManager.instance.Play("MENU");
+            AudioManager.instance.Play("MENU");
     }
     public void LoadScene(string name)
     {
         if (name == "MainLevel" || name == "Faka 2")
         {
-            if (AudioManager.instance != null) AudioManager.instance.Stop("MENU");
-            if (AudioManager.instance != null) AudioManager.instance.Play("START");
-            if (AudioManager.instance != null) AudioManager.instance.Play("GAME");
+            AudioManager.instance.Stop("MENU");
+            AudioManager.instance.Play("START");
+            AudioManager.instance.Play("GAME");
         }
         else
-            if (AudioManager.instance != null) AudioManager.instance.Play("OPTION");
+            AudioManager.instance.Play("OPTION");
 
         SceneManager.LoadScene(name, LoadSceneMode.Single);
     }
