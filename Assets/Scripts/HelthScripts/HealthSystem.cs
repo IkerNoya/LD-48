@@ -7,9 +7,31 @@ public class HealthSystem : MonoBehaviour
 {
     [SerializeField] protected float life;
     [SerializeField] protected float maxLife;
+    [SerializeField] protected float healingSpeed;
+    [SerializeField] protected bool canHeal = false;
     [SerializeField] protected UnityEvent OnDie;
+    float timer = 0;
+    float timerLimit = 3f;
 
-    public void SubstractLife(float damage) { life -= damage; }
+    public void SubstractLife(float damage) 
+    { 
+        life -= damage;
+        timer = 0;
+    }
+
+    void Update()
+    {
+        if (canHeal)
+        {
+            if (timer >= timerLimit)
+            {
+                if (life > maxLife)
+                    life += Time.deltaTime * healingSpeed;
+            }
+            else
+                timer += Time.deltaTime;
+        }
+    }
 
     public bool CheckDie()
     {
@@ -35,4 +57,5 @@ public class HealthSystem : MonoBehaviour
     }
 
     public float GetLife() { return life; }
+    public float GetMaxLife() { return maxLife; }
 }
