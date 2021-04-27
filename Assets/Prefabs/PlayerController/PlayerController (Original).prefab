@@ -5904,8 +5904,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1915de3eaac6f4d4293ae9c8ee56566f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  life: 100
-  maxLife: 100
+  life: 200
+  maxLife: 200
   healingSpeed: 15
   canHeal: 1
   OnDie:

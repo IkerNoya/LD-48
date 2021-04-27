@@ -5,7 +5,7 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Game.unity
     guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 1
@@ -14,16 +14,16 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Credits.unity
     guid: 03dcd41218000fa4c834da89ea657399
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Faka.unity
     guid: 747978c36365b8e4b9c2936c854208e2
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Faka 2.unity
     guid: 3cece6f81b8f23a44bdc62cf61a237ef
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/IkerNoya.unity
     guid: 077d6c0291c160a438a81bfefb9dafd4
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Testing.unity
     guid: ef3bac3d6b693e345b95e1fee6290de9
   - enabled: 1
@@ -32,7 +32,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/GameOver.unity
     guid: fe084cfe625bbfb4b9d44966e3059bc6
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/TL_Testing.unity
     guid: 014d2843de8156240901fcd21f1c1e76
   - enabled: 1
