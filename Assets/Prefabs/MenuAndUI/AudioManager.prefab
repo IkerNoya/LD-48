@@ -44,15 +44,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sounds:
-  - clip: {fileID: 0}
-    volume: 0
-    picth: 0
+  - clip: {fileID: 8300000, guid: b7ac72d42c36c3046b4717d97a98b8fc, type: 3}
+    volume: 1
+    picth: 1
     source: {fileID: 0}
-    name: 
+    name: MENU
+    type: 1
     loop: 0
-  - clip: {fileID: 0}
-    volume: 0
-    picth: 0
+  - clip: {fileID: 8300000, guid: 95dc40312fe82ef409827086eff76e01, type: 3}
+    volume: 1
+    picth: 1
     source: {fileID: 0}
-    name: 
+    name: OPTION
+    type: 0
+    loop: 0
+  - clip: {fileID: 8300000, guid: dc71ff262f33bd240bb8361383b62318, type: 3}
+    volume: 1
+    picth: 1
+    source: {fileID: 0}
+    name: START
+    type: 0
+    loop: 0
+  - clip: {fileID: 8300000, guid: 083988c58ae23b64db9aa14082b77beb, type: 3}
+    volume: 1
+    picth: 1
+    source: {fileID: 0}
+    name: GAME
+    type: 1
     loop: 0
